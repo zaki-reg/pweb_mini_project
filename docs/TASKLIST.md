@@ -150,18 +150,18 @@
 
 ## Phase 7 — Admin Shell
 
-- [ ] 7.1 Create `src/contexts/AdminAuthContext.tsx` with admin state, `isLoading`, and `logout()` function
-- [ ] 7.2 Create `src/components/admin/AdminSidebar.tsx` with navigation links to all admin pages
-- [ ] 7.3 Highlight the active sidebar link using `usePathname()`
-- [ ] 7.4 Make the sidebar collapsible to icon-only on screens below 1024px
-- [ ] 7.5 Create `src/app/admin/layout.tsx` wrapping all admin pages with the sidebar and auth check
-- [ ] 7.6 Add redirect to `/admin/login` in the layout if admin is not authenticated
-- [ ] 7.7 Create `src/components/ui/PageHeader.tsx` with `title` prop and optional action button slot
-- [ ] 7.8 Create `src/components/ui/StatCard.tsx` accepting `label`, `value`, and `icon` props
-- [ ] 7.9 Create `src/components/ui/DataTable.tsx` as a reusable sortable + paginated table component
-- [ ] 7.10 Create `src/components/ui/EmptyState.tsx` with icon, message, and optional CTA button
-- [ ] 7.11 Create `src/components/ui/SkeletonTable.tsx` for loading state in admin tables
-- [ ] 7.12 Verify navigating to `/admin/dashboard` without auth redirects to `/admin/login`
+- [x] 7.1 Create `src/contexts/AdminAuthContext.tsx` with admin state, `isLoading`, and `logout()` function
+- [x] 7.2 Create `src/components/admin/AdminSidebar.tsx` with navigation links to all admin pages
+- [x] 7.3 Highlight the active sidebar link using `usePathname()`
+- [x] 7.4 Make the sidebar collapsible to icon-only on screens below 1024px
+- [x] 7.5 Create `src/app/admin/layout.tsx` wrapping all admin pages with the sidebar and auth check
+- [x] 7.6 Add redirect to `/admin/login` in the layout if admin is not authenticated
+- [x] 7.7 Create `src/components/ui/PageHeader.tsx` with `title` prop and optional action button slot
+- [x] 7.8 Create `src/components/ui/StatCard.tsx` accepting `label`, `value`, and `icon` props
+- [x] 7.9 Create `src/components/ui/DataTable.tsx` as a reusable sortable + paginated table component
+- [x] 7.10 Create `src/components/ui/EmptyState.tsx` with icon, message, and optional CTA button
+- [x] 7.11 Create `src/components/ui/SkeletonTable.tsx` for loading state in admin tables
+- [x] 7.12 Verify navigating to `/admin/dashboard` without auth redirects to `/admin/login`
 
 ---
 
@@ -404,7 +404,7 @@
 | 4 — Admin Endpoints | 24 | 0 |
 | 5 — Public Quiz API | 8 | 0 |
 | 6 — Frontend Bootstrap | 10 | 10 |
-| 7 — Admin Shell | 12 | 0 |
+| 7 — Admin Shell | 12 | 12 |
 | 8 — Admin Pages | 48 | 0 |
 | 9 — Public Pages | 31 | 0 |
 | 10 — Polish | 26 | 0 |
