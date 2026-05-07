@@ -242,21 +242,21 @@
 - [x] 9.8 Show inline error if API call fails
 
 ### Quiz Interface
-- [ ] 9.9 Create `/quiz/page.tsx`
-- [ ] 9.10 Read `sessionToken` from query params on load
-- [ ] 9.11 Load questions from state or re-fetch from `GET /api/sessions/:token`
-- [ ] 9.12 Redirect to homepage if token is invalid or session is already submitted
-- [ ] 9.13 Initialize answers state: `Record<questionId, answerId[]>`
-- [ ] 9.14 Render top progress bar showing current position and answered/unanswered dots
-- [ ] 9.15 Render current question card with question body and type badge
-- [ ] 9.16 Render SCQ answers as a `RadioGroup` — selecting one deselects all others
-- [ ] 9.17 Render MCQ answers as a `Checkbox` group — multiple selectable
-- [ ] 9.18 Add "Previous" and "Next" navigation buttons
-- [ ] 9.19 Show "Submit Quiz" button when on the last question (or always visible with jump-to-review)
-- [ ] 9.20 On "Submit" click, show `AlertDialog` listing unanswered question count with confirm/cancel
-- [ ] 9.21 Format answers payload as `{ answers: [{ questionId, answerIds }] }`
-- [ ] 9.22 Call `POST /api/sessions/:token/submit` and store the result
-- [ ] 9.23 Redirect to `/results?token={sessionToken}` on success
+- [x] 9.9 Create `/quiz/page.tsx`
+- [x] 9.10 Read `sessionToken` from query params on load
+- [x] 9.11 Load questions from state or re-fetch from `GET /api/sessions/:token`
+- [x] 9.12 Redirect to homepage if token is invalid or session is already submitted
+- [x] 9.13 Initialize answers state: `Record<questionId, answerId[]>`
+- [x] 9.14 Render top progress bar showing current position and answered/unanswered dots
+- [x] 9.15 Render current question card with question body and type badge
+- [x] 9.16 Render SCQ answers as a `RadioGroup` — selecting one deselects all others
+- [x] 9.17 Render MCQ answers as a `Checkbox` group — multiple selectable
+- [x] 9.18 Add "Previous" and "Next" navigation buttons
+- [x] 9.19 Show "Submit Quiz" button when on the last question (or always visible with jump-to-review)
+- [x] 9.20 On "Submit" click, show `AlertDialog` listing unanswered question count with confirm/cancel
+- [x] 9.21 Format answers payload as `{ answers: [{ questionId, answerIds }] }`
+- [x] 9.22 Call `POST /api/sessions/:token/submit` and store the result
+- [x] 9.23 Redirect to `/results?token={sessionToken}` on success
 
 ### Results Page
 - [ ] 9.24 Create `/results/page.tsx`
