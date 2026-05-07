@@ -10,7 +10,9 @@
     "migrate": "tsx database/migrate.ts",
     "seed": "tsx database/seed.ts",
     "db:studio": "prisma studio",
-    "db:generate": "prisma generate"
+    "db:generate": "prisma generate",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -36,6 +38,7 @@
     "prisma": "^7.8.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^3.0.0"
   }
 }

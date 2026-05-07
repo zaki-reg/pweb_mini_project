@@ -9,6 +9,7 @@ help:
 	@echo "  make build    - Build containers"
 	@echo "  make logs     - View container logs"
 	@echo "  make clean    - Clean up containers and volumes"
+	@echo "  make test     - Run tests in container"
 
 dev-up:
 	docker compose up -d --build
@@ -31,3 +32,6 @@ logs:
 clean:
 	docker compose down -v --remove-orphans
 	docker system prune -f
+
+test:
+	docker compose run --rm test

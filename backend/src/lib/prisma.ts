@@ -6,6 +6,7 @@ const { Pool } = pg
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined
+  testPrisma: PrismaClient | undefined
 }
 
 function createPrismaClient(): PrismaClient {
@@ -19,5 +20,16 @@ function createPrismaClient(): PrismaClient {
 export const prisma = globalForPrisma.prisma ?? createPrismaClient()
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+
+export function setTestPrisma(client: PrismaClient) {
+  globalForPrisma.testPrisma = client
+}
+
+export function getPrisma(): PrismaClient {
+  if (globalForPrisma.testPrisma) {
+    return globalForPrisma.testPrisma
+  }
+  return prisma
+}
 
 export default prisma

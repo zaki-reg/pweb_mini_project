@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
-import prisma from '../../lib/prisma.js'
+import { getPrisma } from '../../lib/prisma.js'
 import { adminAuthMiddleware } from '../../middleware/auth.js'
 
 const settingsUpdateSchema = z.object({
@@ -24,7 +24,7 @@ export async function settingsRoutes(fastify: FastifyInstance) {
     '/',
     { preHandler: [adminAuthMiddleware] },
     async (request, reply) => {
-      const settings = await prisma.setting.findUnique({
+      const settings = await getPrisma().setting.findUnique({
         where: { id: 1 },
       })
 
@@ -48,7 +48,7 @@ export async function settingsRoutes(fastify: FastifyInstance) {
         })
       }
 
-      const updated = await prisma.setting.upsert({
+      const updated = await getPrisma().setting.upsert({
         where: { id: 1 },
         update: parsed.data,
         create: {

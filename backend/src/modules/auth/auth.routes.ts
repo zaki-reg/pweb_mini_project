@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import bcrypt from 'bcrypt'
-import prisma from '../../lib/prisma.js'
+import { getPrisma } from '../../lib/prisma.js'
 import { adminAuthMiddleware, AdminJwtPayload } from '../../middleware/auth.js'
 
 const loginSchema = z.object({
@@ -29,7 +29,7 @@ export async function authRoutes(fastify: FastifyInstance) {
 
       const { email, password } = parsed.data
 
-      const admin = await prisma.admin.findUnique({
+      const admin = await getPrisma().admin.findUnique({
         where: { email },
       })
 

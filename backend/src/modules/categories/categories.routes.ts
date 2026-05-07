@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
-import prisma from '../../lib/prisma.js'
+import { getPrisma } from '../../lib/prisma.js'
 import { adminAuthMiddleware } from '../../middleware/auth.js'
 
 const categoryCreateSchema = z.object({
@@ -32,7 +32,7 @@ export async function categoriesRoutes(fastify: FastifyInstance) {
     '/',
     { preHandler: [adminAuthMiddleware] },
     async (request, reply) => {
-      const categories = await prisma.category.findMany({
+      const categories = await getPrisma().category.findMany({
         include: {
           _count: {
             select: { questions: true },
@@ -63,7 +63,7 @@ export async function categoriesRoutes(fastify: FastifyInstance) {
       const { name } = parsed.data
       const slug = generateSlug(name)
 
-      const existing = await prisma.category.findUnique({
+      const existing = await getPrisma().category.findUnique({
         where: { slug },
       })
 
@@ -71,7 +71,7 @@ export async function categoriesRoutes(fastify: FastifyInstance) {
         return reply.status(409).send({ error: 'Category with this name already exists' })
       }
 
-      const category = await prisma.category.create({
+      const category = await getPrisma().category.create({
         data: { name, slug },
       })
 
@@ -95,7 +95,7 @@ export async function categoriesRoutes(fastify: FastifyInstance) {
       const { name } = parsed.data
       const slug = generateSlug(name)
 
-      const existing = await prisma.category.findFirst({
+      const existing = await getPrisma().category.findFirst({
         where: { slug, id: { not: id } },
       })
 
@@ -103,7 +103,7 @@ export async function categoriesRoutes(fastify: FastifyInstance) {
         return reply.status(409).send({ error: 'Category with this name already exists' })
       }
 
-      const category = await prisma.category.update({
+      const category = await getPrisma().category.update({
         where: { id },
         data: { name, slug },
       })
@@ -118,7 +118,7 @@ export async function categoriesRoutes(fastify: FastifyInstance) {
     async (request, reply) => {
       const { id } = request.params
 
-      const questionCount = await prisma.question.count({
+      const questionCount = await getPrisma().question.count({
         where: { categoryId: id },
       })
 
@@ -128,7 +128,7 @@ export async function categoriesRoutes(fastify: FastifyInstance) {
         })
       }
 
-      await prisma.category.delete({
+      await getPrisma().category.delete({
         where: { id },
       })
 
