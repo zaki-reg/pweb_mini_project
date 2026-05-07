@@ -168,39 +168,39 @@
 ## Phase 8 — Admin Pages
 
 ### Login
-- [ ] 8.1 Create `/admin/login/page.tsx` with email and password fields
-- [ ] 8.2 Connect form submit to `POST /api/admin/auth/login`
-- [ ] 8.3 Show inline error on failed login
-- [ ] 8.4 Redirect to `/admin/dashboard` on success
-- [ ] 8.5 Show loading spinner while request is in flight
+- [x] 8.1 Create `/admin/login/page.tsx` with email and password fields
+- [x] 8.2 Connect form submit to `POST /api/admin/auth/login`
+- [x] 8.3 Show inline error on failed login
+- [x] 8.4 Redirect to `/admin/dashboard` on success
+- [x] 8.5 Show loading spinner while request is in flight
 
 ### Dashboard
-- [ ] 8.6 Create `/admin/dashboard/page.tsx`
-- [ ] 8.7 Fetch data from `GET /api/admin/stats`
-- [ ] 8.8 Render 4 `StatCard` components: Total Questions, Total Attempts, Average Score, Active Sessions
-- [ ] 8.9 Render recent attempts table using `DataTable`
-- [ ] 8.10 Show skeleton loaders while stats are loading
+- [x] 8.6 Create `/admin/dashboard/page.tsx`
+- [x] 8.7 Fetch data from `GET /api/admin/stats`
+- [x] 8.8 Render 4 `StatCard` components: Total Questions, Total Attempts, Average Score, Active Sessions
+- [x] 8.9 Render recent attempts table using `DataTable`
+- [x] 8.10 Show skeleton loaders while stats are loading
 
 ### Question Management
-- [ ] 8.11 Create `/admin/questions/page.tsx` with `DataTable` of all questions
-- [ ] 8.12 Add search input (debounced 300ms) that filters by question body
-- [ ] 8.13 Add filter dropdowns for Type and Difficulty
-- [ ] 8.14 Add "New Question" button
-- [ ] 8.15 Add Edit and Delete action buttons per row
-- [ ] 8.16 Wire Delete to `AlertDialog` confirmation before calling `DELETE /api/admin/questions/:id`
-- [ ] 8.17 Create `src/components/admin/QuestionForm.tsx` as a shared form component for create and edit
-- [ ] 8.18 Add question body textarea field with character count
-- [ ] 8.19 Add Type radio group (SCQ / MCQ) — switching type resets correct answer selections
-- [ ] 8.20 Add Category select with "No category" option
-- [ ] 8.21 Add Difficulty select: Easy, Medium, Hard
-- [ ] 8.22 Add Explanation textarea (optional)
-- [ ] 8.23 Add dynamic answer list: each row has a text input and a correct answer checkbox (or radio for SCQ)
-- [ ] 8.24 Add "+ Add Answer" button (disabled at 6 answers)
-- [ ] 8.25 Add "Remove" button per answer (disabled when only 2 answers remain)
-- [ ] 8.26 Validate: at least 2 answers, exactly 1 correct for SCQ, at least 1 correct for MCQ
-- [ ] 8.27 Show inline validation errors on submit attempt
-- [ ] 8.28 Wire form submit to `POST /api/admin/questions` for create
-- [ ] 8.29 Wire form submit to `PUT /api/admin/questions/:id` for edit (pre-fill all fields)
+- [x] 8.11 Create `/admin/questions/page.tsx` with `DataTable` of all questions
+- [x] 8.12 Add search input (debounced 300ms) that filters by question body
+- [x] 8.13 Add filter dropdowns for Type and Difficulty
+- [x] 8.14 Add "New Question" button
+- [x] 8.15 Add Edit and Delete action buttons per row
+- [x] 8.16 Wire Delete to `AlertDialog` confirmation before calling `DELETE /api/admin/questions/:id`
+- [x] 8.17 Create `src/components/admin/QuestionForm.tsx` as a shared form component for create and edit
+- [x] 8.18 Add question body textarea field with character count
+- [x] 8.19 Add Type radio group (SCQ / MCQ) — switching type resets correct answer selections
+- [x] 8.20 Add Category select with "No category" option
+- [x] 8.21 Add Difficulty select: Easy, Medium, Hard
+- [x] 8.22 Add Explanation textarea (optional)
+- [x] 8.23 Add dynamic answer list: each row has a text input and a correct answer checkbox (or radio for SCQ)
+- [x] 8.24 Add "+ Add Answer" button (disabled at 6 answers)
+- [x] 8.25 Add "Remove" button per answer (disabled when only 2 answers remain)
+- [x] 8.26 Validate: at least 2 answers, exactly 1 correct for SCQ, at least 1 correct for MCQ
+- [x] 8.27 Show inline validation errors on submit attempt
+- [x] 8.28 Wire form submit to `POST /api/admin/questions` for create
+- [x] 8.29 Wire form submit to `PUT /api/admin/questions/:id` for edit (pre-fill all fields)
 
 ### Categories
 - [ ] 8.30 Create `/admin/categories/page.tsx`
