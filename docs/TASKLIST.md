@@ -75,36 +75,36 @@
 ## Phase 4 — Admin Resource Endpoints
 
 ### Settings
-- [ ] 4.1 Create `src/modules/settings/settings.routes.ts`
-- [ ] 4.2 Implement `GET /api/admin/settings`: return the single settings row
-- [ ] 4.3 Implement `PUT /api/admin/settings`: validate and update `numQuestions`, `timerEnabled`, `timerSeconds`, `allowReview`
-- [ ] 4.4 Apply `adminAuthMiddleware` to both settings routes
+- [x] 4.1 Create `src/modules/settings/settings.routes.ts`
+- [x] 4.2 Implement `GET /api/admin/settings`: return the single settings row
+- [x] 4.3 Implement `PUT /api/admin/settings`: validate and update `numQuestions`, `timerEnabled`, `timerSeconds`, `allowReview`
+- [x] 4.4 Apply `adminAuthMiddleware` to both settings routes
 
 ### Categories
-- [ ] 4.5 Create `src/modules/categories/categories.routes.ts`
-- [ ] 4.6 Implement `GET /api/admin/categories`: return all categories
-- [ ] 4.7 Implement `POST /api/admin/categories`: validate name, auto-generate slug, create category
-- [ ] 4.8 Implement `PUT /api/admin/categories/:id`: rename category and regenerate slug
-- [ ] 4.9 Implement `DELETE /api/admin/categories/:id`: reject with error if category has questions, otherwise delete
-- [ ] 4.10 Apply `adminAuthMiddleware` to all category routes
+- [x] 4.5 Create `src/modules/categories/categories.routes.ts`
+- [x] 4.6 Implement `GET /api/admin/categories`: return all categories
+- [x] 4.7 Implement `POST /api/admin/categories`: validate name, auto-generate slug, create category
+- [x] 4.8 Implement `PUT /api/admin/categories/:id`: rename category and regenerate slug
+- [x] 4.9 Implement `DELETE /api/admin/categories/:id`: reject with error if category has questions, otherwise delete
+- [x] 4.10 Apply `adminAuthMiddleware` to all category routes
 
 ### Questions
-- [ ] 4.11 Create `src/modules/questions/questions.routes.ts`
-- [ ] 4.12 Implement `GET /api/admin/questions`: return paginated list, support query params `page`, `limit`, `search`, `type`, `categoryId`, `difficulty`
-- [ ] 4.13 Implement `GET /api/admin/questions/:id`: return single question with all answers
-- [ ] 4.14 Implement `POST /api/admin/questions`: validate with Zod (including refine rule: SCQ needs exactly 1 correct, MCQ needs at least 1), create question + answers in a Prisma transaction
-- [ ] 4.15 Implement `PUT /api/admin/questions/:id`: update question and replace all answers in a single Prisma transaction
-- [ ] 4.16 Implement `DELETE /api/admin/questions/:id`: delete question (answers cascade via Prisma)
-- [ ] 4.17 Apply `adminAuthMiddleware` to all question routes
+- [x] 4.11 Create `src/modules/questions/questions.routes.ts`
+- [x] 4.12 Implement `GET /api/admin/questions`: return paginated list, support query params `page`, `limit`, `search`, `type`, `categoryId`, `difficulty`
+- [x] 4.13 Implement `GET /api/admin/questions/:id`: return single question with all answers
+- [x] 4.14 Implement `POST /api/admin/questions`: validate with Zod (including refine rule: SCQ needs exactly 1 correct, MCQ needs at least 1), create question + answers in a Prisma transaction
+- [x] 4.15 Implement `PUT /api/admin/questions/:id`: update question and replace all answers in a single Prisma transaction
+- [x] 4.16 Implement `DELETE /api/admin/questions/:id`: delete question (answers cascade via Prisma)
+- [x] 4.17 Apply `adminAuthMiddleware` to all question routes
 
 ### Attempts & Stats
-- [ ] 4.18 Create `src/modules/attempts/attempts.routes.ts`
-- [ ] 4.19 Implement `GET /api/admin/attempts`: paginated list of submitted sessions with username, score, dates
-- [ ] 4.20 Implement `GET /api/admin/attempts/:id`: full detail with per-question breakdown (user answers vs. correct answers)
-- [ ] 4.21 Create `src/modules/stats/stats.routes.ts`
-- [ ] 4.22 Implement `GET /api/admin/stats`: return `totalQuestions`, `totalAttempts`, `averageScore`, `recentAttempts` (last 10)
-- [ ] 4.23 Apply `adminAuthMiddleware` to all attempts and stats routes
-- [ ] 4.24 Register all new route modules on the Fastify app
+- [x] 4.18 Create `src/modules/attempts/attempts.routes.ts`
+- [x] 4.19 Implement `GET /api/admin/attempts`: paginated list of submitted sessions with username, score, dates
+- [x] 4.20 Implement `GET /api/admin/attempts/:id`: full detail with per-question breakdown (user answers vs. correct answers)
+- [x] 4.21 Create `src/modules/stats/stats.routes.ts`
+- [x] 4.22 Implement `GET /api/admin/stats`: return `totalQuestions`, `totalAttempts`, `averageScore`, `recentAttempts` (last 10)
+- [x] 4.23 Apply `adminAuthMiddleware` to all attempts and stats routes
+- [x] 4.24 Register all new route modules on the Fastify app
 
 ---
 
