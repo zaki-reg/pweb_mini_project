@@ -218,14 +218,14 @@
 - [x] 8.40 Highlight correct answers in green and wrong selections in red
 
 ### Settings
-- [ ] 8.41 Create `/admin/settings/page.tsx`
-- [ ] 8.42 Fetch current settings from `GET /api/admin/settings` and pre-fill the form
-- [ ] 8.43 Add number input for `numQuestions` (min 1, max 50)
-- [ ] 8.44 Add toggle switch for `allowReview`
-- [ ] 8.45 Add toggle switch for `timerEnabled`
-- [ ] 8.46 Show timer duration input (in minutes) only when `timerEnabled` is on
-- [ ] 8.47 Wire save button to `PUT /api/admin/settings`
-- [ ] 8.48 Show success toast on save, error toast on failure
+- [x] 8.41 Create `/admin/settings/page.tsx`
+- [x] 8.42 Fetch current settings from `GET /api/admin/settings` and pre-fill the form
+- [x] 8.43 Add number input for `numQuestions` (min 1, max 50)
+- [x] 8.44 Add toggle switch for `allowReview`
+- [x] 8.45 Add toggle switch for `timerEnabled`
+- [x] 8.46 Show timer duration input (in minutes) only when `timerEnabled` is on
+- [x] 8.47 Wire save button to `PUT /api/admin/settings`
+- [x] 8.48 Show success toast on save, error toast on failure
 
 ---
 
@@ -405,7 +405,7 @@
 | 5 — Public Quiz API | 8 | 0 |
 | 6 — Frontend Bootstrap | 10 | 10 |
 | 7 — Admin Shell | 12 | 12 |
-| 8 — Admin Pages | 48 | 34 |
+| 8 — Admin Pages | 48 | 48 |
 | 9 — Public Pages | 31 | 0 |
 | 10 — Polish | 26 | 0 |
 | 11 — Testing | 27 | 0 |
