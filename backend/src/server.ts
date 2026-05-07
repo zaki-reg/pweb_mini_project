@@ -3,6 +3,11 @@ import cors from '@fastify/cors'
 import cookie from '@fastify/cookie'
 import jwt from '@fastify/jwt'
 import { authRoutes } from './modules/auth/auth.routes.js'
+import { settingsRoutes } from './modules/settings/settings.routes.js'
+import { categoriesRoutes } from './modules/categories/categories.routes.js'
+import { questionsRoutes } from './modules/questions/questions.routes.js'
+import { attemptsRoutes } from './modules/attempts/attempts.routes.js'
+import { statsRoutes } from './modules/stats/stats.routes.js'
 
 const app = Fastify({ logger: true })
 
@@ -27,6 +32,13 @@ app.get('/health', async () => {
 
 // Register auth routes
 app.register(authRoutes, { prefix: '/api/admin/auth' })
+
+// Register admin resource routes
+app.register(settingsRoutes, { prefix: '/api/admin/settings' })
+app.register(categoriesRoutes, { prefix: '/api/admin/categories' })
+app.register(questionsRoutes, { prefix: '/api/admin/questions' })
+app.register(attemptsRoutes, { prefix: '/api/admin/attempts' })
+app.register(statsRoutes, { prefix: '/api/admin/stats' })
 
 // Start server
 const start = async () => {
