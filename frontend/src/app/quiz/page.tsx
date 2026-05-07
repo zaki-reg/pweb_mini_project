@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useState, useMemo } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { api } from '@/lib/api'
-import { QuizSession, Question } from '@/types'
+import { QuizSession } from '@/types'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
@@ -52,7 +52,6 @@ function QuizContent() {
           loadedSession = parsed
         }
       } catch {
-        // Invalid stored data
       }
     }
 
@@ -152,19 +151,16 @@ function QuizContent() {
 
   if (isLoading) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-[#0a0a0a]">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full animate-spin" />
-          <p className="text-slate-400">Loading quiz...</p>
-        </div>
+      <main className="min-h-screen flex items-center justify-center bg-white">
+        <p className="text-gray-500">Loading...</p>
       </main>
     )
   }
 
   if (!session || !currentQuestion) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-[#0a0a0a]">
-        <p className="text-slate-400">Invalid quiz session</p>
+      <main className="min-h-screen flex items-center justify-center bg-white">
+        <p className="text-gray-500">Invalid session</p>
       </main>
     )
   }
@@ -172,42 +168,29 @@ function QuizContent() {
   const progress = ((currentIndex + 1) / session.questions.length) * 100
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] py-8 px-4">
-      <div className="max-w-3xl mx-auto">
-        <div className="mb-8">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-4">
-            <div className="flex items-center gap-2 sm:gap-4">
-              <span className="text-slate-400 text-sm">
-                Q{currentIndex + 1}/{session.questions.length}
-              </span>
-              <Badge
-                variant={currentQuestion.type === 'SCQ' ? 'default' : 'secondary'}
-                className={currentQuestion.type === 'SCQ' 
-                  ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' 
-                  : 'bg-purple-500/20 text-purple-400 border-purple-500/30'}
-              >
-                {currentQuestion.type === 'SCQ' ? 'SCQ' : 'MCQ'}
-              </Badge>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-slate-400">
-              <span className="text-emerald-400">{answeredCount} done</span>
-              {unansweredCount > 0 && (
-                <span className="text-rose-400">{unansweredCount} left</span>
-              )}
-            </div>
+    <main className="min-h-screen bg-white py-8 px-4">
+      <div className="max-w-lg mx-auto">
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-sm text-gray-500">
+              {currentIndex + 1} / {session.questions.length}
+            </span>
+            <Badge variant="outline" className="text-xs">
+              {currentQuestion.type}
+            </Badge>
           </div>
-          <Progress value={progress} className="h-2 bg-slate-800" />
-          <div className="flex gap-2 mt-4 flex-wrap">
+          <Progress value={progress} className="h-1 bg-gray-200" />
+          <div className="flex gap-1 mt-3 flex-wrap">
             {session.questions.map((q, idx) => (
               <button
                 key={q.id}
                 onClick={() => setCurrentIndex(idx)}
-                className={`w-8 h-8 rounded-full text-xs font-medium transition-all ${
+                className={`w-7 h-7 rounded-full text-xs transition-all ${
                   idx === currentIndex
-                    ? 'bg-amber-500 text-white'
+                    ? 'bg-black text-white'
                     : answers[q.id]?.length
-                    ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                    : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                    ? 'bg-gray-200 text-black'
+                    : 'bg-gray-100 text-gray-400 hover:bg-gray-200'
                 }`}
               >
                 {idx + 1}
@@ -216,9 +199,9 @@ function QuizContent() {
           </div>
         </div>
 
-        <Card className="bg-slate-900/80 border-slate-800">
+        <Card className="border-2 border-black rounded-xl">
           <CardHeader>
-            <CardTitle className="text-xl text-white leading-relaxed">
+            <CardTitle className="text-lg text-black leading-relaxed">
               {currentQuestion.body}
             </CardTitle>
           </CardHeader>
@@ -229,27 +212,27 @@ function QuizContent() {
                 onValueChange={(value) =>
                   handleAnswerSelect(currentQuestion.id, value, false)
                 }
-                className="space-y-3"
+                className="space-y-2"
                 aria-label="Answer options"
               >
                 {currentQuestion.answers.map((answer) => (
                   <div
                     key={answer.id}
-                    className={`flex items-start sm:items-center space-x-3 p-3 sm:p-4 rounded-lg border transition-all cursor-pointer ${
+                    className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all cursor-pointer ${
                       answers[currentQuestion.id]?.[0] === answer.id
-                        ? 'bg-amber-500/10 border-amber-500/50'
-                        : 'bg-slate-800/50 border-slate-700 hover:border-slate-600'
+                        ? 'border-black bg-gray-100'
+                        : 'border-gray-200 hover:border-gray-300'
                     }`}
                     onClick={() => handleAnswerSelect(currentQuestion.id, answer.id, false)}
                   >
                     <RadioGroupItem
                       value={answer.id}
                       id={answer.id}
-                      className="border-slate-500 text-amber-500 mt-1 sm:mt-0"
+                      className="border-black"
                     />
                     <Label
                       htmlFor={answer.id}
-                      className="text-slate-200 cursor-pointer flex-1 text-sm sm:text-base"
+                      className="text-black cursor-pointer flex-1 text-sm"
                     >
                       {answer.body}
                     </Label>
@@ -257,30 +240,30 @@ function QuizContent() {
                 ))}
               </RadioGroup>
             ) : (
-              <div className="space-y-3" role="group" aria-label="Answer options">
+              <div className="space-y-2" role="group" aria-label="Answer options">
                 {currentQuestion.answers.map((answer) => {
                   const isSelected = isAnswerSelected(currentQuestion.id, answer.id)
                   return (
                     <div
                       key={answer.id}
-                      className={`flex items-start sm:items-center space-x-3 p-3 sm:p-4 rounded-lg border transition-all cursor-pointer ${
+                      className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all cursor-pointer ${
                         isSelected
-                          ? 'bg-purple-500/10 border-purple-500/50'
-                          : 'bg-slate-800/50 border-slate-700 hover:border-slate-600'
+                          ? 'border-black bg-gray-100'
+                          : 'border-gray-200 hover:border-gray-300'
                       }`}
                       onClick={() => handleAnswerSelect(currentQuestion.id, answer.id, true)}
                     >
                       <Checkbox
                         id={answer.id}
                         checked={isSelected}
-                        className="border-slate-500 text-purple-500 mt-1 sm:mt-0"
+                        className="border-black"
                         onCheckedChange={() =>
                           handleAnswerSelect(currentQuestion.id, answer.id, true)
                         }
                       />
                       <Label
                         htmlFor={answer.id}
-                        className="text-slate-200 cursor-pointer flex-1 text-sm sm:text-base"
+                        className="text-black cursor-pointer flex-1 text-sm"
                       >
                         {answer.body}
                       </Label>
@@ -292,12 +275,12 @@ function QuizContent() {
           </CardContent>
         </Card>
 
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8">
+        <div className="flex gap-3 mt-6">
           <Button
             variant="outline"
             onClick={handlePrevious}
             disabled={currentIndex === 0}
-            className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white w-full sm:w-auto min-h-[44px]"
+            className="flex-1 h-11 border-2 border-black text-black rounded-lg hover:bg-gray-100"
           >
             Previous
           </Button>
@@ -305,14 +288,14 @@ function QuizContent() {
           {currentIndex === session.questions.length - 1 ? (
             <Button
               onClick={() => setShowSubmitDialog(true)}
-              className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white w-full sm:w-auto min-h-[44px]"
+              className="flex-1 h-11 bg-black text-white rounded-lg hover:bg-gray-800"
             >
-              Submit Quiz
+              Submit
             </Button>
           ) : (
             <Button
               onClick={handleNext}
-              className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white w-full sm:w-auto min-h-[44px]"
+              className="flex-1 h-11 bg-black text-white rounded-lg hover:bg-gray-800"
             >
               Next
             </Button>
@@ -321,34 +304,25 @@ function QuizContent() {
       </div>
 
       <AlertDialog open={showSubmitDialog} onOpenChange={setShowSubmitDialog}>
-        <AlertDialogContent className="bg-slate-900 border-slate-800">
+        <AlertDialogContent className="border-2 border-black rounded-xl">
           <AlertDialogHeader>
-            <AlertDialogTitle className="text-white">Submit Quiz?</AlertDialogTitle>
-            <AlertDialogDescription className="text-slate-400">
+            <AlertDialogTitle>Submit Quiz?</AlertDialogTitle>
+            <AlertDialogDescription className="text-gray-600">
               {unansweredCount > 0 ? (
                 <span>
-                  You have{' '}
-                  <span className="text-amber-400 font-semibold">
-                    {unansweredCount} unanswered question
-                    {unansweredCount > 1 ? 's' : ''}
-                  </span>
-                  . You can still submit, but unanswered questions will be marked as incorrect.
+                  You have {unansweredCount} unanswered question{unansweredCount > 1 ? 's' : ''}.
                 </span>
               ) : (
-                <span>
-                  You have answered all {session.questions.length} questions. Ready to submit?
-                </span>
+                <span>Ready to submit?</span>
               )}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="border-slate-700 text-slate-300 hover:bg-slate-800">
-              Review Answers
-            </AlertDialogCancel>
+            <AlertDialogCancel className="border-2 border-black rounded-lg">Review</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleSubmitQuiz}
               disabled={isSubmitting}
-              className="bg-amber-500 hover:bg-amber-600 text-white"
+              className="bg-black text-white rounded-lg hover:bg-gray-800"
             >
               {isSubmitting ? 'Submitting...' : 'Submit'}
             </AlertDialogAction>
@@ -356,18 +330,15 @@ function QuizContent() {
         </AlertDialogContent>
       </AlertDialog>
 
-      <Toaster position="top-center" richColors />
+      <Toaster position="top-center" />
     </main>
   )
 }
 
 function LoadingState() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-[#0a0a0a]">
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full animate-spin" />
-        <p className="text-slate-400">Loading quiz...</p>
-      </div>
+    <main className="min-h-screen flex items-center justify-center bg-white">
+      <p className="text-gray-500">Loading...</p>
     </main>
   )
 }

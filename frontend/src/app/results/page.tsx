@@ -5,7 +5,6 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { api } from '@/lib/api'
 import { SubmitResult, QuestionResult } from '@/types'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Accordion,
   AccordionContent,
@@ -14,8 +13,6 @@ import {
 } from '@/components/ui/accordion'
 import { Badge } from '@/components/ui/badge'
 import { Toaster, toast } from 'sonner'
-import { EmptyState } from '@/components/ui/empty-state'
-import { EyeOff } from 'lucide-react'
 
 interface QuizSessionData {
   sessionToken: string
@@ -57,7 +54,6 @@ function ResultsContent() {
       try {
         parsedResult = JSON.parse(storedResult) as SubmitResult
       } catch {
-        // Invalid
       }
     }
 
@@ -65,7 +61,6 @@ function ResultsContent() {
       try {
         parsedSession = JSON.parse(storedSession) as QuizSessionData
       } catch {
-        // Invalid
       }
     }
 
@@ -124,10 +119,10 @@ function ResultsContent() {
 
   const gradeBand = useMemo(() => {
     if (!result) return { label: '', color: '' }
-    if (result.score >= 85) return { label: 'Excellent', color: 'text-emerald-400' }
-    if (result.score >= 70) return { label: 'Good', color: 'text-amber-400' }
-    if (result.score >= 50) return { label: 'Pass', color: 'text-blue-400' }
-    return { label: 'Needs Improvement', color: 'text-rose-400' }
+    if (result.score >= 85) return { label: 'Excellent', color: 'text-green-600' }
+    if (result.score >= 70) return { label: 'Good', color: 'text-blue-600' }
+    if (result.score >= 50) return { label: 'Pass', color: 'text-yellow-600' }
+    return { label: 'Try Again', color: 'text-red-600' }
   }, [result])
 
   const getQuestionResult = (questionId: string): QuestionResult | undefined => {
@@ -142,74 +137,37 @@ function ResultsContent() {
 
   if (!result) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-[#0a0a0a]">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full animate-spin" />
-          <p className="text-slate-400">Loading results...</p>
-        </div>
+      <main className="min-h-screen flex items-center justify-center bg-white">
+        <p className="text-gray-500">Loading...</p>
       </main>
     )
   }
 
-  const circumference = 2 * Math.PI * 40
-  const strokeDashoffset = circumference - (animatedScore / 100) * circumference
-
   return (
-    <main className="min-h-screen bg-[#0a0a0a] py-12 px-4">
-      <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">Quiz Complete!</h1>
+    <main className="min-h-screen bg-white py-12 px-4">
+      <div className="max-w-lg mx-auto">
+        <div className="text-center mb-10">
+          <h1 className="text-2xl font-medium text-black mb-6">Quiz Complete</h1>
 
-          <div className="relative inline-block">
-            <svg className="w-32 h-32 sm:w-40 sm:w-48 sm:h-48 transform -rotate-90">
-              <circle
-                cx="64"
-                cy="64"
-                r="40"
-                stroke="currentColor"
-                strokeWidth="6"
-                fill="transparent"
-                className="text-slate-800"
-              />
-              <circle
-                cx="64"
-                cy="64"
-                r="40"
-                stroke="url(#gradient)"
-                strokeWidth="6"
-                fill="transparent"
-                strokeLinecap="round"
-                strokeDasharray={circumference}
-                strokeDashoffset={strokeDashoffset}
-                className="transition-all duration-1000 ease-out"
-              />
-              <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#f59e0b" />
-                  <stop offset="100%" stopColor="#ea580c" />
-                </linearGradient>
-              </defs>
-            </svg>
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-4xl sm:text-5xl font-bold text-white">{animatedScore}%</span>
-            </div>
+          <div className="inline-flex items-center justify-center w-32 h-32 rounded-full border-4 border-black mb-4">
+            <span className="text-4xl font-medium text-black">{animatedScore}%</span>
           </div>
 
-          <div className="mt-6">
-            <span className={`text-2xl font-semibold ${gradeBand.color}`}>
+          <div className="mb-2">
+            <span className={`text-lg font-medium ${gradeBand.color}`}>
               {gradeBand.label}
             </span>
           </div>
 
-          <div className="mt-4 text-slate-400 text-lg">
-            {result.correctAnswers} out of {result.totalQuestions} correct
+          <div className="text-gray-500">
+            {result.correctAnswers} / {result.totalQuestions} correct
           </div>
         </div>
 
         {result.questions && result.questions.length > 0 && session ? (
-          <div className="mt-12">
-            <h2 className="text-xl font-semibold text-white mb-6">Review Your Answers</h2>
-            <Accordion type="single" collapsible className="space-y-3">
+          <div className="mb-8">
+            <h2 className="text-sm font-medium text-black mb-4">Review</h2>
+            <Accordion type="single" collapsible className="space-y-2">
               {session.questions.map((question, index) => {
                 const questionResult = getQuestionResult(question.id)
                 const isCorrect = questionResult?.userAnswers.every((ua) => ua.isCorrect) ?? false
@@ -218,41 +176,21 @@ function ResultsContent() {
                   <AccordionItem
                     key={question.id}
                     value={question.id}
-                    className="bg-slate-900/80 border-slate-800 rounded-lg px-4"
+                    className="border-2 border-gray-200 rounded-lg px-4"
                   >
                     <AccordionTrigger className="hover:no-underline">
                       <div className="flex items-center gap-3 text-left">
-                        <span className="text-slate-400 text-sm">Q{index + 1}</span>
-                        <span className="text-slate-200 text-sm line-clamp-2 flex-1">
+                        <span className="text-gray-400 text-sm">Q{index + 1}</span>
+                        <span className="text-black text-sm line-clamp-1 flex-1">
                           {question.body}
                         </span>
                         {isCorrect ? (
-                          <svg
-                            className="w-5 h-5 text-emerald-400 flex-shrink-0"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M5 13l4 4L19 7"
-                            />
+                          <svg className="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
                         ) : (
-                          <svg
-                            className="w-5 h-5 text-rose-400 flex-shrink-0"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M6 18L18 6M6 6l12 12"
-                            />
+                          <svg className="w-5 h-5 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                           </svg>
                         )}
                       </div>
@@ -267,66 +205,33 @@ function ResultsContent() {
                             (ca) => ca.id === answer.id
                           )
 
-                          let bgClass = 'bg-slate-800/50'
-                          let borderClass = 'border-slate-700'
-                          let textClass = 'text-slate-300'
+                          let bgClass = 'bg-gray-50'
+                          let borderClass = 'border-gray-200'
+                          let textClass = 'text-gray-700'
 
                           if (isCorrectAnswer) {
-                            bgClass = 'bg-emerald-500/10'
-                            borderClass = 'border-emerald-500/50'
-                            textClass = 'text-emerald-300'
+                            bgClass = 'bg-green-50'
+                            borderClass = 'border-green-300'
+                            textClass = 'text-green-700'
                           } else if (isUserAnswer && !isCorrectAnswer) {
-                            bgClass = 'bg-rose-500/10'
-                            borderClass = 'border-rose-500/50'
-                            textClass = 'text-rose-300'
+                            bgClass = 'bg-red-50'
+                            borderClass = 'border-red-300'
+                            textClass = 'text-red-700'
                           }
 
                           return (
                             <div
                               key={answer.id}
-                              className={`flex items-center gap-3 p-3 rounded-lg border ${bgClass} ${borderClass}`}
+                              className={`flex items-center gap-2 p-2 rounded border ${bgClass} ${borderClass}`}
                             >
-                              {isCorrectAnswer ? (
-                                <svg
-                                  className="w-4 h-4 text-emerald-400 flex-shrink-0"
-                                  fill="currentColor"
-                                  viewBox="0 0 20 20"
-                                >
-                                  <path
-                                    fillRule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                    clipRule="evenodd"
-                                  />
-                                </svg>
-                              ) : isUserAnswer ? (
-                                <svg
-                                  className="w-4 h-4 text-rose-400 flex-shrink-0"
-                                  fill="currentColor"
-                                  viewBox="0 0 20 20"
-                                >
-                                  <path
-                                    fillRule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                                    clipRule="evenodd"
-                                  />
-                                </svg>
-                              ) : (
-                                <div className="w-4 h-4" />
-                              )}
                               <span className={`text-sm ${textClass}`}>{answer.body}</span>
                               {isCorrectAnswer && (
-                                <Badge
-                                  variant="outline"
-                                  className="ml-auto text-xs border-emerald-500/50 text-emerald-400"
-                                >
+                                <Badge variant="outline" className="ml-auto text-xs border-green-500 text-green-600">
                                   Correct
                                 </Badge>
                               )}
                               {isUserAnswer && !isCorrectAnswer && (
-                                <Badge
-                                  variant="outline"
-                                  className="ml-auto text-xs border-rose-500/50 text-rose-400"
-                                >
+                                <Badge variant="outline" className="ml-auto text-xs border-red-500 text-red-600">
                                   Your answer
                                 </Badge>
                               )}
@@ -335,9 +240,9 @@ function ResultsContent() {
                         })}
 
                         {question.explanation && (
-                          <div className="mt-4 p-4 bg-slate-800/30 rounded-lg border border-slate-700">
-                            <p className="text-sm text-slate-400">
-                              <span className="font-medium text-slate-300">Explanation: </span>
+                          <div className="mt-3 p-3 bg-gray-50 rounded border border-gray-200">
+                            <p className="text-sm text-gray-600">
+                              <span className="font-medium">Explanation: </span>
                               {question.explanation}
                             </p>
                           </div>
@@ -350,36 +255,28 @@ function ResultsContent() {
             </Accordion>
           </div>
         ) : (
-          <div className="mt-12">
-            <EmptyState
-              icon={EyeOff}
-              message="Review is not available for this quiz. Your score has been recorded."
-            />
+          <div className="mb-8 text-center text-gray-500">
+            Review not available
           </div>
         )}
 
-        <div className="mt-12 text-center">
-          <Button
-            onClick={handleTryAgain}
-            className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-8 py-6 text-lg"
-          >
-            Try Again
-          </Button>
-        </div>
+        <Button
+          onClick={handleTryAgain}
+          className="w-full h-11 bg-black text-white rounded-lg hover:bg-gray-800"
+        >
+          Try Again
+        </Button>
       </div>
 
-      <Toaster position="top-center" richColors />
+      <Toaster position="top-center" />
     </main>
   )
 }
 
 function LoadingState() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-[#0a0a0a]">
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full animate-spin" />
-        <p className="text-slate-400">Loading results...</p>
-      </div>
+    <main className="min-h-screen flex items-center justify-center bg-white">
+      <p className="text-gray-500">Loading...</p>
     </main>
   )
 }
