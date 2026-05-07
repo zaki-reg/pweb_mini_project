@@ -210,12 +210,12 @@
 - [x] 8.34 Add "New Category" form at the top of the page
 
 ### Attempts
-- [ ] 8.35 Create `/admin/attempts/page.tsx` with paginated table of all submitted sessions
-- [ ] 8.36 Show: username, submitted date, score %, correct / total
-- [ ] 8.37 Make each row clickable to open the attempt detail view
-- [ ] 8.38 Create `/admin/attempts/[id]/page.tsx` for the detail view
-- [ ] 8.39 Show per-question breakdown: question body, user's selected answers, correct answers, explanation
-- [ ] 8.40 Highlight correct answers in green and wrong selections in red
+- [x] 8.35 Create `/admin/attempts/page.tsx` with paginated table of all submitted sessions
+- [x] 8.36 Show: username, submitted date, score %, correct / total
+- [x] 8.37 Make each row clickable to open the attempt detail view
+- [x] 8.38 Create `/admin/attempts/[id]/page.tsx` for the detail view
+- [x] 8.39 Show per-question breakdown: question body, user's selected answers, correct answers, explanation
+- [x] 8.40 Highlight correct answers in green and wrong selections in red
 
 ### Settings
 - [ ] 8.41 Create `/admin/settings/page.tsx`
@@ -405,7 +405,7 @@
 | 5 — Public Quiz API | 8 | 0 |
 | 6 — Frontend Bootstrap | 10 | 10 |
 | 7 — Admin Shell | 12 | 12 |
-| 8 — Admin Pages | 48 | 0 |
+| 8 — Admin Pages | 48 | 34 |
 | 9 — Public Pages | 31 | 0 |
 | 10 — Polish | 26 | 0 |
 | 11 — Testing | 27 | 0 |

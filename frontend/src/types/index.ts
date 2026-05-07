@@ -62,6 +62,10 @@ export interface Attempt {
   timeTakenSeconds: number | null
 }
 
+export interface AttemptDetail extends Attempt {
+  questions: QuestionResult[]
+}
+
 export interface Setting {
   id: number
   numQuestions: number
