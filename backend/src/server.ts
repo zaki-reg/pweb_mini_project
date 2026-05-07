@@ -13,8 +13,9 @@ import { sessionsRoutes } from './modules/sessions/sessions.routes.js'
 const app = Fastify({ logger: true })
 
 // Register plugins
+const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000'
 app.register(cors, {
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: frontendUrl.split(',').map(url => url.trim()),
   credentials: true,
 })
 app.register(cookie)
