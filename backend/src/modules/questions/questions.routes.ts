@@ -107,11 +107,10 @@ export async function questionsRoutes(fastify: FastifyInstance) {
       ]);
 
       return {
-        data: questions,
+        questions,
         total,
         page,
         limit,
-        totalPages: Math.ceil(total / limit),
       };
     },
   );
