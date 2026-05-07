@@ -282,12 +282,12 @@
 - [x] 10.4 Add empty state to quiz results review if no review data is available
 
 ### Error Handling
-- [ ] 10.5 Wrap every API call in a try/catch
-- [ ] 10.6 Show Sonner error toast for any failed API call
-- [ ] 10.7 Show Sonner success toast for every successful create/update/delete in admin
-- [ ] 10.8 Handle 401 response globally in the API client: redirect to `/admin/login`
-- [ ] 10.9 Handle invalid/missing session token on `/quiz`: redirect to `/` with error toast
-- [ ] 10.10 Handle already-submitted session on `/quiz`: redirect to `/results` or homepage
+- [x] 10.5 Wrap every API call in a try/catch
+- [x] 10.6 Show Sonner error toast for any failed API call
+- [x] 10.7 Show Sonner success toast for every successful create/update/delete in admin
+- [x] 10.8 Handle 401 response globally in the API client: redirect to `/admin/login`
+- [x] 10.9 Handle invalid/missing session token on `/quiz`: redirect to `/` with error toast
+- [x] 10.10 Handle already-submitted session on `/quiz`: redirect to `/results` or homepage
 
 ### Responsive Design
 - [ ] 10.11 Test homepage at 375px, 768px, 1280px — no overflow or broken layout

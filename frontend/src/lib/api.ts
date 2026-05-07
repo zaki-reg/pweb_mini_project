@@ -19,6 +19,13 @@ async function fetchApi<T>(
       credentials: 'include',
     })
 
+    if (response.status === 401) {
+      if (typeof window !== 'undefined' && endpoint.startsWith('/api/admin')) {
+        window.location.href = '/admin/login'
+      }
+      return { error: 'Unauthorized' }
+    }
+
     const data = await response.json()
 
     if (!response.ok) {
