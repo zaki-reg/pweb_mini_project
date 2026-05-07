@@ -259,17 +259,17 @@
 - [x] 9.23 Redirect to `/results?token={sessionToken}` on success
 
 ### Results Page
-- [ ] 9.24 Create `/results/page.tsx`
-- [ ] 9.25 Load result from state or re-fetch from session token
-- [ ] 9.26 Show large animated score percentage (count-up animation from 0 to final score)
-- [ ] 9.27 Show animated SVG score ring filling to the final percentage
-- [ ] 9.28 Show grade band label: Excellent (≥85%), Good (≥70%), Pass (≥50%), Needs Improvement (<50%)
-- [ ] 9.29 Show "X out of Y correct" count
-- [ ] 9.30 If `allowReview` is true, render accordion list of all questions:
-  - [ ] 9.30.1 Each accordion item header shows question number and a correct/incorrect icon
-  - [ ] 9.30.2 Each accordion body shows all answer options with green (correct) and red (wrong selected) highlights
-  - [ ] 9.30.3 Show explanation text below answers if present
-- [ ] 9.31 Add "Try Again" button that clears state and navigates to `/`
+- [x] 9.24 Create `/results/page.tsx`
+- [x] 9.25 Load result from state or re-fetch from session token
+- [x] 9.26 Show large animated score percentage (count-up animation from 0 to final score)
+- [x] 9.27 Show animated SVG score ring filling to the final percentage
+- [x] 9.28 Show grade band label: Excellent (≥85%), Good (≥70%), Pass (≥50%), Needs Improvement (<50%)
+- [x] 9.29 Show "X out of Y correct" count
+- [x] 9.30 If `allowReview` is true, render accordion list of all questions:
+  - [x] 9.30.1 Each accordion item header shows question number and a correct/incorrect icon
+  - [x] 9.30.2 Each accordion body shows all answer options with green (correct) and red (wrong selected) highlights
+  - [x] 9.30.3 Show explanation text below answers if present
+- [x] 9.31 Add "Try Again" button that clears state and navigates to `/`
 
 ---
 
