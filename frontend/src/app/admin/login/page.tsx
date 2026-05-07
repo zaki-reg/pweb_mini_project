@@ -1,12 +1,11 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { api } from '@/lib/api'
 import { useAdminAuth } from '@/contexts/AdminAuthContext'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -15,13 +14,11 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
-  const { admin, isLoading: authLoading } = useAdminAuth()
-  const redirected = useRef(false)
+  const { admin, isLoading: authLoading, refreshAdmin } = useAdminAuth()
 
   useEffect(() => {
-    if (!authLoading && admin && !redirected.current) {
-      redirected.current = true
-      router.push('/admin/dashboard')
+    if (!authLoading && admin) {
+      router.replace('/admin/dashboard')
     }
   }, [admin, authLoading, router])
 
@@ -29,15 +26,18 @@ export default function AdminLoginPage() {
     e.preventDefault()
     setIsLoading(true)
 
-    const { error } = await api.post('/api/admin/auth/login', { email, password })
+    const result = await api.post<{ id: string }>('/api/admin/auth/login', { email, password })
 
-    if (error) {
-      toast.error(error)
+    if (result.error) {
+      toast.error(result.error)
       setIsLoading(false)
       return
     }
 
-    router.push('/admin/dashboard')
+    if (result.data) {
+      refreshAdmin()
+      router.push('/admin/dashboard')
+    }
   }
 
   if (authLoading) {
