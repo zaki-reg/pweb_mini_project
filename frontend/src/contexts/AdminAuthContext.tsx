@@ -8,7 +8,7 @@ interface AdminAuthContextType {
   admin: Admin | null
   isLoading: boolean
   logout: () => Promise<void>
-  refreshAdmin: () => Promise<void>
+  refreshAdmin: () => void
 }
 
 const AdminAuthContext = createContext<AdminAuthContextType | undefined>(undefined)
@@ -17,30 +17,33 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const [admin, setAdmin] = useState<Admin | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
-  const refreshAdmin = async () => {
-    try {
-      const { data } = await api.get<Admin>('/api/admin/auth/me')
-      if (data) {
-        setAdmin(data)
-      } else {
-        setAdmin(null)
-      }
-    } catch {
-      setAdmin(null)
-    }
-  }
-
   const logout = async () => {
-    await api.post('/api/admin/auth/logout')
+    try {
+      await api.post('/api/admin/auth/logout')
+    } catch {
+      // ignore
+    }
     setAdmin(null)
   }
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => setIsLoading(false), 8000)
-    refreshAdmin().finally(() => {
-      clearTimeout(timeoutId)
+  const refreshAdmin = () => {
+    setIsLoading(true)
+    check()
+  }
+
+  const check = async () => {
+    try {
+      const { data } = await api.get<Admin>('/api/admin/auth/me')
+      setAdmin(data || null)
+    } catch {
+      setAdmin(null)
+    } finally {
       setIsLoading(false)
-    })
+    }
+  }
+
+  useEffect(() => {
+    check()
   }, [])
 
   return (
