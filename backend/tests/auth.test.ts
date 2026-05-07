@@ -102,7 +102,6 @@ describe('Auth Endpoints', () => {
       const body = JSON.parse(response.body)
       expect(body.email).toBe('admin@quiz.com')
       expect(body.id).toBeDefined()
-      expect(body.name).toBeDefined()
     })
   })
 

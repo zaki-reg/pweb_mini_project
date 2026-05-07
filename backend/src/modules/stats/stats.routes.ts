@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
-import prisma from '../../lib/prisma.js'
+import { getPrisma } from '../../lib/prisma.js'
 import { adminAuthMiddleware } from '../../middleware/auth.js'
 
 const statsSchema = z.object({
@@ -20,6 +20,7 @@ export async function statsRoutes(fastify: FastifyInstance) {
     '/',
     { preHandler: [adminAuthMiddleware] },
     async (request, reply) => {
+      const prisma = getPrisma()
       const [totalQuestions, totalAttempts, recentAttempts] = await Promise.all([
         prisma.question.count(),
         prisma.quizSession.count({ where: { submittedAt: { not: null } } }),
@@ -41,10 +42,13 @@ export async function statsRoutes(fastify: FastifyInstance) {
         _avg: { score: true },
       })
 
+      const avgScore = avgResult._avg.score
       return {
         totalQuestions,
         totalAttempts,
-        averageScore: avgResult._avg.score ? Math.round(avgResult._avg.score * 100) / 100 : null,
+        averageScore: avgScore !== null && avgScore !== undefined
+          ? Math.round(Number(avgScore) * 100) / 100
+          : null,
         recentAttempts,
       }
     }
