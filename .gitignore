@@ -37,4 +37,4 @@ prisma/migrations
 *.dockerignore
 
 # Docs
-/docs/*
+!/docs/
