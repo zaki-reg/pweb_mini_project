@@ -8,6 +8,7 @@ import { categoriesRoutes } from './modules/categories/categories.routes.js'
 import { questionsRoutes } from './modules/questions/questions.routes.js'
 import { attemptsRoutes } from './modules/attempts/attempts.routes.js'
 import { statsRoutes } from './modules/stats/stats.routes.js'
+import { sessionsRoutes } from './modules/sessions/sessions.routes.js'
 
 const app = Fastify({ logger: true })
 
@@ -39,6 +40,9 @@ app.register(categoriesRoutes, { prefix: '/api/admin/categories' })
 app.register(questionsRoutes, { prefix: '/api/admin/questions' })
 app.register(attemptsRoutes, { prefix: '/api/admin/attempts' })
 app.register(statsRoutes, { prefix: '/api/admin/stats' })
+
+// Register public session routes
+app.register(sessionsRoutes, { prefix: '/api/sessions' })
 
 // Start server
 const start = async () => {
