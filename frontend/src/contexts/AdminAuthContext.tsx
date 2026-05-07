@@ -18,10 +18,14 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
 
   const refreshAdmin = async () => {
-    const { data, error } = await api.get<Admin>('/api/admin/auth/me')
-    if (data) {
-      setAdmin(data)
-    } else {
+    try {
+      const { data } = await api.get<Admin>('/api/admin/auth/me')
+      if (data) {
+        setAdmin(data)
+      } else {
+        setAdmin(null)
+      }
+    } catch {
       setAdmin(null)
     }
   }
@@ -32,7 +36,11 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-    refreshAdmin().finally(() => setIsLoading(false))
+    const timeoutId = setTimeout(() => setIsLoading(false), 8000)
+    refreshAdmin().finally(() => {
+      clearTimeout(timeoutId)
+      setIsLoading(false)
+    })
   }, [])
 
   return (
