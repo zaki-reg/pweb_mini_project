@@ -8,7 +8,6 @@ import { StatCard } from '@/components/ui/stat-card'
 import { DataTable } from '@/components/ui/data-table'
 import { SkeletonTable } from '@/components/ui/skeleton-table'
 import { HelpCircle, Users, TrendingUp, Clock } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
 import { EmptyState } from '@/components/ui/empty-state'
 import { History } from 'lucide-react'
 
@@ -37,11 +36,9 @@ export default function DashboardPage() {
       header: 'Score',
       render: (item: { score: number | null }) => (
         item.score !== null ? (
-          <Badge variant={item.score >= 70 ? 'default' : 'secondary'}>
-            {item.score}%
-          </Badge>
+          <span className="font-medium">{item.score}%</span>
         ) : (
-          <span className="text-slate-400">-</span>
+          <span className="text-gray-400">-</span>
         )
       ),
     },

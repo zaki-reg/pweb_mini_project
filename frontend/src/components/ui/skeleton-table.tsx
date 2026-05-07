@@ -20,7 +20,7 @@ export function SkeletonTable({ columns, rows = 5 }: SkeletonTableProps) {
           <TableRow>
             {[...Array(columns)].map((_, i) => (
               <TableHead key={i}>
-                <div className="h-4 w-20 bg-slate-100 animate-pulse rounded" />
+                <div className="h-4 w-20 bg-gray-200 animate-pulse rounded" />
               </TableHead>
             ))}
           </TableRow>
@@ -30,7 +30,7 @@ export function SkeletonTable({ columns, rows = 5 }: SkeletonTableProps) {
             <TableRow key={rowIndex}>
               {[...Array(columns)].map((_, colIndex) => (
                 <TableCell key={colIndex}>
-                  <div className="h-4 w-full bg-slate-100 animate-pulse rounded" />
+                  <div className="h-4 w-full bg-gray-200 animate-pulse rounded" />
                 </TableCell>
               ))}
             </TableRow>

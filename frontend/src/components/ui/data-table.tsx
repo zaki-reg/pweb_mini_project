@@ -37,10 +37,10 @@ export function DataTable<T>({ columns, data, keyField, pageSize = 10, isLoading
   if (isLoading) {
     return (
       <div className="space-y-4">
-        <div className="h-10 bg-slate-100 animate-pulse rounded" />
+        <div className="h-10 bg-gray-200 animate-pulse rounded" />
         <div className="space-y-2">
           {[...Array(5)].map((_, i) => (
-            <div key={i} className="h-12 bg-slate-100 animate-pulse rounded" />
+            <div key={i} className="h-12 bg-gray-200 animate-pulse rounded" />
           ))}
         </div>
       </div>
@@ -86,7 +86,7 @@ export function DataTable<T>({ columns, data, keyField, pageSize = 10, isLoading
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
-          <span className="text-sm text-slate-500">
+          <span className="text-sm text-gray-500">
             Page {currentPage} of {totalPages}
           </span>
           <Button
