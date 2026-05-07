@@ -232,14 +232,14 @@
 ## Phase 9 — Public Quiz Pages
 
 ### Homepage
-- [ ] 9.1 Create `/page.tsx` (root homepage)
-- [ ] 9.2 Add platform name/logo and short tagline
-- [ ] 9.3 Add username input with validation: min 2 chars, max 50 chars
-- [ ] 9.4 Add "Start Quiz" button
-- [ ] 9.5 On submit, call `POST /api/sessions/start`
-- [ ] 9.6 Store `sessionToken` and questions in React state or `sessionStorage`
-- [ ] 9.7 Redirect to `/quiz?token={sessionToken}` on success
-- [ ] 9.8 Show inline error if API call fails
+- [x] 9.1 Create `/page.tsx` (root homepage)
+- [x] 9.2 Add platform name/logo and short tagline
+- [x] 9.3 Add username input with validation: min 2 chars, max 50 chars
+- [x] 9.4 Add "Start Quiz" button
+- [x] 9.5 On submit, call `POST /api/sessions/start`
+- [x] 9.6 Store `sessionToken` and questions in React state or `sessionStorage`
+- [x] 9.7 Redirect to `/quiz?token={sessionToken}` on success
+- [x] 9.8 Show inline error if API call fails
 
 ### Quiz Interface
 - [ ] 9.9 Create `/quiz/page.tsx`
