@@ -8,7 +8,7 @@ interface AdminAuthContextType {
   admin: Admin | null
   isLoading: boolean
   logout: () => Promise<void>
-  refreshAdmin: () => void
+  refreshAdmin: () => Promise<Admin | null>
 }
 
 const AdminAuthContext = createContext<AdminAuthContextType | undefined>(undefined)
@@ -26,9 +26,19 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     setAdmin(null)
   }
 
-  const refreshAdmin = () => {
+  const refreshAdmin = async (): Promise<Admin | null> => {
     setIsLoading(true)
-    check()
+    try {
+      const { data } = await api.get<Admin>('/api/admin/auth/me')
+      setAdmin(data || null)
+      return data || null
+    } catch (error) {
+      console.error('refreshAdmin error:', error)
+      setAdmin(null)
+      return null
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const check = async () => {

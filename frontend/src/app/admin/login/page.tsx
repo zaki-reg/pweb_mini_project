@@ -1,9 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { api } from '@/lib/api'
-import { useAdminAuth } from '@/contexts/AdminAuthContext'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Loader2 } from 'lucide-react'
@@ -13,14 +11,6 @@ export default function AdminLoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
-  const { admin, isLoading: authLoading, refreshAdmin } = useAdminAuth()
-
-  useEffect(() => {
-    if (!authLoading && admin) {
-      router.replace('/admin/dashboard')
-    }
-  }, [admin, authLoading, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -34,18 +24,8 @@ export default function AdminLoginPage() {
       return
     }
 
-    if (result.data) {
-      refreshAdmin()
-      router.push('/admin/dashboard')
-    }
-  }
-
-  if (authLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
-      </div>
-    )
+    // Full page redirect to ensure cookie is sent
+    window.location.href = '/admin/dashboard'
   }
 
   return (
