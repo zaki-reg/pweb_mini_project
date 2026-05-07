@@ -110,28 +110,28 @@
 
 ## Phase 5 — Public Quiz API
 
-- [ ] 5.1 Create `src/modules/sessions/sessions.routes.ts`
-- [ ] 5.2 Implement `POST /api/sessions/start`:
-  - [ ] 5.2.1 Validate `username` (min 2, max 50 chars) with Zod
-  - [ ] 5.2.2 Fetch `numQuestions` from the settings row
-  - [ ] 5.2.3 Select random questions using `ORDER BY RANDOM()` via `prisma.$queryRaw`
-  - [ ] 5.2.4 Create `QuizSession` row with unique `sessionToken`
-  - [ ] 5.2.5 Create `SessionQuestion` rows with `displayOrder`
-  - [ ] 5.2.6 Return session token + questions with answers — **never include `isCorrect` in the response**
-- [ ] 5.3 Implement `GET /api/sessions/:token`: return session + questions if not yet submitted, 404 if not found, 409 if already submitted
-- [ ] 5.4 Implement `POST /api/sessions/:token/submit`:
-  - [ ] 5.4.1 Find session by token, return 409 if already submitted
-  - [ ] 5.4.2 Validate all submitted `questionId`s belong to this session
-  - [ ] 5.4.3 Insert all `UserAnswer` rows
-  - [ ] 5.4.4 Grade each SCQ question: 1 point if selected answer matches the correct answer
-  - [ ] 5.4.5 Grade each MCQ question: 1 point only if selected answer set exactly matches correct answer set
-  - [ ] 5.4.6 Compute `score = (correctAnswers / totalQuestions) * 100`
-  - [ ] 5.4.7 Update session with `submittedAt`, `score`, `correctAnswers`
-  - [ ] 5.4.8 If `allowReview=true`: return full per-question breakdown. If false: return only score totals
-- [ ] 5.5 Register session routes on the Fastify app under `/api/sessions`
-- [ ] 5.6 Verify full quiz flow works via API client (Postman, curl, or Bruno)
-- [ ] 5.7 Verify submitting the same token twice returns 409
-- [ ] 5.8 Verify `isCorrect` is never present in session start response
+- [x] 5.1 Create `src/modules/sessions/sessions.routes.ts`
+- [x] 5.2 Implement `POST /api/sessions/start`:
+  - [x] 5.2.1 Validate `username` (min 2, max 50 chars) with Zod
+  - [x] 5.2.2 Fetch `numQuestions` from the settings row
+  - [x] 5.2.3 Select random questions using `ORDER BY RANDOM()` via `prisma.$queryRaw`
+  - [x] 5.2.4 Create `QuizSession` row with unique `sessionToken`
+  - [x] 5.2.5 Create `SessionQuestion` rows with `displayOrder`
+  - [x] 5.2.6 Return session token + questions with answers — **never include `isCorrect` in the response**
+- [x] 5.3 Implement `GET /api/sessions/:token`: return session + questions if not yet submitted, 404 if not found, 409 if already submitted
+- [x] 5.4 Implement `POST /api/sessions/:token/submit`:
+  - [x] 5.4.1 Find session by token, return 409 if already submitted
+  - [x] 5.4.2 Validate all submitted `questionId`s belong to this session
+  - [x] 5.4.3 Insert all `UserAnswer` rows
+  - [x] 5.4.4 Grade each SCQ question: 1 point if selected answer matches the correct answer
+  - [x] 5.4.5 Grade each MCQ question: 1 point only if selected answer set exactly matches correct answer set
+  - [x] 5.4.6 Compute `score = (correctAnswers / totalQuestions) * 100`
+  - [x] 5.4.7 Update session with `submittedAt`, `score`, `correctAnswers`
+  - [x] 5.4.8 If `allowReview=true`: return full per-question breakdown. If false: return only score totals
+- [x] 5.5 Register session routes on the Fastify app under `/api/sessions`
+- [x] 5.6 Verify full quiz flow works via API client (Postman, curl, or Bruno)
+- [x] 5.7 Verify submitting the same token twice returns 409
+- [x] 5.8 Verify `isCorrect` is never present in session start response
 
 ---
 
