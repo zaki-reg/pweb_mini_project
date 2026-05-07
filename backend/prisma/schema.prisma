@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Admin {
+  id           String   @id @default(uuid())
+  name         String   @map("name") @db.VarChar(100)
+  email        String   @unique @map("email") @db.VarChar(150)
+  passwordHash String   @map("passwordHash") @db.Text
+  createdAt    DateTime @default(now()) @map("createdAt")
+  updatedAt    DateTime @updatedAt @map("updatedAt")
+
+  @@map("Admin")
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  name      String   @db.VarChar(100)
+  slug      String   @unique @db.VarChar(120)
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+  questions Question[]
+
+  @@map("Category")
+}
+
+model Question {
+  id          String   @id @default(uuid())
+  body        String   @db.Text
+  type        String   @db.VarChar(10)
+  difficulty  String   @default("MEDIUM") @db.VarChar(20)
+  explanation String?  @db.Text
+  categoryId  String?  @map("categoryId")
+  createdAt   DateTime @default(now()) @map("createdAt")
+  updatedAt   DateTime @updatedAt @map("updatedAt")
+  category    Category? @relation(fields: [categoryId], references: [id])
+  answers     Answer[]
+  sessionQuestions SessionQuestion[]
+  userAnswers UserAnswer[]
+
+  @@index([categoryId])
+  @@map("Question")
+}
+
+model Answer {
+  id         String   @id @default(uuid())
+  body       String   @db.Text
+  isCorrect  Boolean  @default(false) @map("isCorrect")
+  questionId String   @map("questionId")
+  createdAt  DateTime @default(now()) @map("createdAt")
+  updatedAt  DateTime @updatedAt @map("updatedAt")
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  userAnswers UserAnswer[]
+
+  @@index([questionId])
+  @@map("Answer")
+}
+
+model QuizSession {
+  id              String    @id @default(uuid())
+  username        String    @db.VarChar(100)
+  sessionToken    String    @unique @map("sessionToken") @db.VarChar(36)
+  startedAt       DateTime  @default(now()) @map("startedAt")
+  submittedAt     DateTime? @map("submittedAt")
+  score           Decimal?  @db.Decimal(5, 2)
+  totalQuestions Int       @map("totalQuestions")
+  correctAnswers Int?      @map("correctAnswers")
+  timeTakenSeconds Int?    @map("timeTakenSeconds")
+  sessionQuestions SessionQuestion[]
+  userAnswers     UserAnswer[]
+
+  @@map("QuizSession")
+}
+
+model SessionQuestion {
+  id          String     @id @default(uuid())
+  sessionId   String     @map("sessionId")
+  questionId  String     @map("questionId")
+  displayOrder Int      @map("displayOrder")
+  session     QuizSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  question    Question   @relation(fields: [questionId], references: [id])
+
+  @@index([sessionId])
+  @@index([questionId])
+  @@map("SessionQuestion")
+}
+
+model UserAnswer {
+  id         String     @id @default(uuid())
+  sessionId  String     @map("sessionId")
+  questionId String     @map("questionId")
+  answerId   String     @map("answerId")
+  session    QuizSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  question   Question   @relation(fields: [questionId], references: [id])
+  answer     Answer     @relation(fields: [answerId], references: [id])
+
+  @@index([sessionId])
+  @@index([questionId])
+  @@map("UserAnswer")
+}
+
+model Setting {
+  id            Int      @id
+  numQuestions  Int      @default(15) @map("numQuestions")
+  timerEnabled  Boolean  @default(false) @map("timerEnabled")
+  timerSeconds  Int      @default(1200) @map("timerSeconds")
+  allowReview   Boolean  @default(true) @map("allowReview")
+  updatedAt     DateTime @updatedAt @map("updatedAt")
+
+  @@map("Setting")
+}

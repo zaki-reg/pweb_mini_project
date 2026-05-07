@@ -6,7 +6,4 @@ export default defineConfig({
     path: "prisma/migrations",
     seed: "tsx prisma/seed.ts",
   },
-  datasource: {
-    url: process.env.DATABASE_URL || "postgresql://postgres:postgres@db:5432/quiz_platform",
-  },
 });
