@@ -58,17 +58,17 @@
 
 ## Phase 3 — Admin Authentication
 
-- [ ] 3.1 Create `src/lib/prisma.ts` exporting a singleton PrismaClient instance
-- [ ] 3.2 Create `src/middleware/auth.ts` with `adminAuthMiddleware` that reads and verifies the JWT cookie
-- [ ] 3.3 Create `src/modules/auth/auth.routes.ts`
-- [ ] 3.4 Implement `POST /api/admin/auth/login`: validate body with Zod, find admin by email, compare password with bcrypt, sign JWT, set `httpOnly` cookie
-- [ ] 3.5 Implement `POST /api/admin/auth/logout`: clear the `admin_token` cookie
-- [ ] 3.6 Implement `GET /api/admin/auth/me`: verify cookie, return admin info from JWT payload
-- [ ] 3.7 Register all auth routes on the Fastify instance under prefix `/api/admin/auth`
-- [ ] 3.8 Verify login with correct credentials sets cookie and returns admin info
-- [ ] 3.9 Verify login with wrong password returns 401
-- [ ] 3.10 Verify `GET /me` without cookie returns 401
-- [ ] 3.11 Verify `GET /me` with valid cookie returns admin data
+- [x] 3.1 Create `src/lib/prisma.ts` exporting a singleton PrismaClient instance
+- [x] 3.2 Create `src/middleware/auth.ts` with `adminAuthMiddleware` that reads and verifies the JWT cookie
+- [x] 3.3 Create `src/modules/auth/auth.routes.ts`
+- [x] 3.4 Implement `POST /api/admin/auth/login`: validate body with Zod, find admin by email, compare password with bcrypt, sign JWT, set `httpOnly` cookie
+- [x] 3.5 Implement `POST /api/admin/auth/logout`: clear the `admin_token` cookie
+- [x] 3.6 Implement `GET /api/admin/auth/me`: verify cookie, return admin info from JWT payload
+- [x] 3.7 Register all auth routes on the Fastify instance under prefix `/api/admin/auth`
+- [x] 3.8 Verify login with correct credentials sets cookie and returns admin info
+- [x] 3.9 Verify login with wrong password returns 401
+- [x] 3.10 Verify `GET /me` without cookie returns 401
+- [x] 3.11 Verify `GET /me` with valid cookie returns admin data
 
 ---
 
