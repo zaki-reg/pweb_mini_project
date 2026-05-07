@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { api } from '@/lib/api'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Card, CardContent } from '@/components/ui/card'
 import { QuizSession } from '@/types'
 import { Toaster, toast } from 'sonner'
 
@@ -20,7 +19,7 @@ export default function Home() {
     setError('')
 
     if (username.length < 2 || username.length > 50) {
-      setError('Username must be between 2 and 50 characters')
+      setError('Enter 2-50 characters')
       return
     }
 
@@ -42,57 +41,34 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-white p-6">
-      <div className="w-full max-w-sm">
-        <div className="text-center mb-10">
-          <h1 className="text-3xl font-medium text-black mb-2">
-            Quiz
-          </h1>
-          <p className="text-gray-500 text-sm">
-            Test your knowledge
-          </p>
-        </div>
+      <div className="w-full max-w-xs">
+        <h1 className="text-xl font-medium text-center text-black mb-8">Quiz</h1>
 
-        <Card className="border-2 border-black rounded-2xl">
-          <CardContent className="p-6">
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="space-y-2">
-                <label
-                  htmlFor="username"
-                  className="text-sm font-medium text-black"
-                >
-                  Your Name
-                </label>
-                <Input
-                  id="username"
-                  type="text"
-                  placeholder="Enter your name"
-                  value={username}
-                  onChange={(e) => {
-                    setUsername(e.target.value)
-                    if (error) setError('')
-                  }}
-                  className="border-2 border-black rounded-lg text-black placeholder:text-gray-400 h-11"
-                  autoComplete="off"
-                />
-                {error && (
-                  <p className="text-red-600 text-sm">{error}</p>
-                )}
-              </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <Input
+            id="username"
+            type="text"
+            placeholder="Your name"
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value)
+              if (error) setError('')
+            }}
+            className="h-10 text-center placeholder:text-center text-black border-gray-300 rounded-md"
+            autoComplete="off"
+          />
+          {error && (
+            <p className="text-red-500 text-xs text-center">{error}</p>
+          )}
 
-              <Button
-                type="submit"
-                disabled={isLoading}
-                className="w-full h-11 text-sm font-medium bg-black text-white rounded-lg hover:bg-gray-800 disabled:opacity-50"
-              >
-                {isLoading ? 'Starting...' : 'Start Quiz'}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-
-        <p className="text-center text-gray-400 text-xs mt-6">
-          No account required
-        </p>
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className="w-full h-10 text-sm bg-black text-white rounded-md hover:bg-gray-800 disabled:opacity-50"
+          >
+            {isLoading ? 'Starting...' : 'Start'}
+          </Button>
+        </form>
       </div>
 
       <Toaster position="top-center" />
