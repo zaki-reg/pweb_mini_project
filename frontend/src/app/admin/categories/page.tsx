@@ -172,6 +172,7 @@ export default function CategoriesPage() {
                           size="icon"
                           variant="ghost"
                           className="h-8 w-8"
+                          aria-label="Save category name"
                           onClick={() => handleUpdate(category.id)}
                           disabled={isUpdating === category.id}
                         >
@@ -181,6 +182,7 @@ export default function CategoriesPage() {
                           size="icon"
                           variant="ghost"
                           className="h-8 w-8"
+                          aria-label="Cancel edit"
                           onClick={() => setEditingId(null)}
                         >
                           <X className="h-4 w-4" />
@@ -205,6 +207,7 @@ export default function CategoriesPage() {
                           <Button
                             variant="ghost"
                             size="icon"
+                            aria-label="Edit category"
                             onClick={() => startEdit(category)}
                           >
                             <Pencil className="h-4 w-4" />
@@ -216,6 +219,7 @@ export default function CategoriesPage() {
                               className="cursor-not-allowed opacity-50"
                               title="Cannot delete category with questions"
                               disabled
+                              aria-label="Cannot delete category with questions"
                             >
                               <Trash2 className="h-4 w-4" />
                             </Button>
@@ -226,6 +230,7 @@ export default function CategoriesPage() {
                                   variant="ghost"
                                   size="icon"
                                   className="text-red-500 hover:text-red-600"
+                                  aria-label="Delete category"
                                   onClick={() => setDeleteId(category.id)}
                                 >
                                   <Trash2 className="h-4 w-4" />

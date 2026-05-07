@@ -38,6 +38,7 @@ export function AdminSidebar() {
         size="icon"
         className="fixed top-4 left-4 z-50 lg:hidden"
         onClick={() => setMobileOpen(!mobileOpen)}
+        aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
       >
         {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </Button>
@@ -57,6 +58,7 @@ export function AdminSidebar() {
             variant="ghost"
             size="icon"
             className="hidden lg:flex text-slate-400 hover:text-white"
+            aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             onClick={() => setCollapsed(!collapsed)}
           >
             <ChevronLeft className={`h-5 w-5 transition-transform ${collapsed ? 'rotate-180' : ''}`} />

@@ -170,6 +170,7 @@ export default function QuestionsPage() {
           <Button
             variant="ghost"
             size="icon"
+            aria-label="Edit question"
             onClick={() => {
               setEditingQuestion(item)
               setIsFormOpen(true)
@@ -183,6 +184,7 @@ export default function QuestionsPage() {
                 variant="ghost"
                 size="icon"
                 className="text-red-500 hover:text-red-600"
+                aria-label="Delete question"
                 onClick={() => setDeleteId(item.id)}
               >
                 <Trash2 className="h-4 w-4" />

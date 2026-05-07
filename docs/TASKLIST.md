@@ -298,12 +298,12 @@
 - [x] 10.16 Ensure all touch targets are at least 44×44px
 
 ### Accessibility
-- [ ] 10.17 Ensure every `<input>` has an associated `<label>`
-- [ ] 10.18 Ensure every icon-only button has an `aria-label`
-- [ ] 10.19 Ensure quiz answer options use proper `<fieldset>` and `<legend>` wrapping
-- [ ] 10.20 Ensure correctness in results is conveyed by icon AND color (not color alone)
-- [ ] 10.21 Verify keyboard navigation works through the full quiz flow (Tab, Enter, Space)
-- [ ] 10.22 Verify color contrast meets WCAG AA on all surfaces (especially badge colors on cards)
+- [x] 10.17 Ensure every `<input>` has an associated `<label>`
+- [x] 10.18 Ensure every icon-only button has an `aria-label`
+- [x] 10.19 Ensure quiz answer options use proper `<fieldset>` and `<legend>` wrapping
+- [x] 10.20 Ensure correctness in results is conveyed by icon AND color (not color alone)
+- [x] 10.21 Verify keyboard navigation works through the full quiz flow (Tab, Enter, Space)
+- [x] 10.22 Verify color contrast meets WCAG AA on all surfaces (especially badge colors on cards)
 
 ### Security
 - [ ] 10.23 Confirm `admin_token` cookie is set with `httpOnly: true` and `sameSite: lax`

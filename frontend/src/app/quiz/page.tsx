@@ -230,6 +230,7 @@ function QuizContent() {
                   handleAnswerSelect(currentQuestion.id, value, false)
                 }
                 className="space-y-3"
+                aria-label="Answer options"
               >
                 {currentQuestion.answers.map((answer) => (
                   <div
@@ -256,7 +257,7 @@ function QuizContent() {
                 ))}
               </RadioGroup>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-3" role="group" aria-label="Answer options">
                 {currentQuestion.answers.map((answer) => {
                   const isSelected = isAnswerSelected(currentQuestion.id, answer.id)
                   return (

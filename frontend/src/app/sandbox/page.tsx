@@ -102,7 +102,7 @@ export default function SandboxPage() {
           <Button variant="link">Link</Button>
           <Button size="sm">Small</Button>
           <Button size="lg">Large</Button>
-          <Button size="icon"><ArrowRight className="h-4 w-4" /></Button>
+          <Button size="icon" aria-label="Next"><ArrowRight className="h-4 w-4" /></Button>
         </Section>
 
         <Separator />

@@ -300,6 +300,7 @@ export function QuestionForm({ question, categories, onSuccess, onCancel }: Ques
                 type="button"
                 variant="ghost"
                 size="icon"
+                aria-label={`Remove answer ${index + 1}`}
                 onClick={() => removeAnswer(index)}
                 disabled={answers.length <= 2}
               >
