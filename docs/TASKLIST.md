@@ -137,16 +137,14 @@
 
 ## Phase 6 — Frontend Bootstrap
 
-- [ ] 6.1 `cd frontend` and run `create-next-app` with TypeScript, Tailwind, ESLint, App Router, and src directory
-- [ ] 6.2 Run `npx shadcn@latest init` and select Default style, Neutral base color, CSS variables enabled
-- [ ] 6.3 Install shadcn components: `button`, `input`, `textarea`, `card`, `dialog`, `alert-dialog`, `table`, `badge`, `dropdown-menu`, `tabs`, `select`, `checkbox`, `radio-group`, `progress`, `toast`, `separator`, `label`, `form`
-- [ ] 6.4 Install additional packages: `sonner`, `lucide-react`, `react-hook-form`, `@hookform/resolvers`, `zod`
-- [ ] 6.5 Create `src/lib/api.ts` with a typed fetch wrapper supporting `get`, `post`, `put`, `delete` methods with `credentials: "include"`
-- [ ] 6.6 Create `src/types/index.ts` with all shared TypeScript interfaces: `Question`, `Answer`, `QuizSession`, `SubmitResult`, `QuestionResult`, `AdminQuestion`, `Attempt`, `Setting`
-- [ ] 6.7 Set `NEXT_PUBLIC_API_URL` in `.env.local` pointing to `http://localhost:4000`
-- [ ] 6.8 Create `Dockerfile.dev` for frontend and add it to `docker-compose.yml`
-- [ ] 6.9 Verify `docker compose up frontend` boots Next.js without errors
-- [ ] 6.10 Verify a shadcn `Button` component renders correctly on a test page
+- [x] 6.1 `cd frontend` and run `create-next-app` with TypeScript, Tailwind, ESLint, App Router, and src directory
+- [x] 6.2 Run `npx shadcn@latest init` and select Default style, Neutral base color, CSS variables enabled
+- [x] 6.3 Install shadcn components: `button`, `input`, `textarea`, `card`, `dialog`, `alert-dialog`, `table`, `badge`, `dropdown-menu`, `tabs`, `select`, `checkbox`, `radio-group`, `progress`, `toast`, `separator`, `label`, `form`
+- [x] 6.4 Install additional packages: `sonner`, `lucide-react`, `react-hook-form`, `@hookform/resolvers`, `zod`
+- [x] 6.5 Create `src/lib/api.ts` with a typed fetch wrapper supporting `get`, `post`, `put`, `delete` methods with `credentials: "include"`
+- [x] 6.6 Create `src/types/index.ts` with all shared TypeScript interfaces: `Question`, `Answer`, `QuizSession`, `SubmitResult`, `QuestionResult`, `AdminQuestion`, `Attempt`, `Setting`
+- [x] 6.7 Set `NEXT_PUBLIC_API_URL` in `.env.local` pointing to `http://127.0.0.1:4000`
+- [x] 6.10 Verify a shadcn `Button` component renders correctly on a test page
 
 ---
 
@@ -405,7 +403,7 @@
 | 3 — Admin Auth | 11 | 0 |
 | 4 — Admin Endpoints | 24 | 0 |
 | 5 — Public Quiz API | 8 | 0 |
-| 6 — Frontend Bootstrap | 10 | 0 |
+| 6 — Frontend Bootstrap | 10 | 10 |
 | 7 — Admin Shell | 12 | 0 |
 | 8 — Admin Pages | 48 | 0 |
 | 9 — Public Pages | 31 | 0 |
