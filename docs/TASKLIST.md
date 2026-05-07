@@ -306,10 +306,10 @@
 - [x] 10.22 Verify color contrast meets WCAG AA on all surfaces (especially badge colors on cards)
 
 ### Security
-- [ ] 10.23 Confirm `admin_token` cookie is set with `httpOnly: true` and `sameSite: lax`
-- [ ] 10.24 Confirm `isCorrect` field is absent from `POST /api/sessions/start` response
-- [ ] 10.25 Confirm all Zod schemas reject malformed payloads with a 400 response
-- [ ] 10.26 Confirm JWT secret is read from environment variable, never hardcoded
+- [x] 10.23 Confirm `admin_token` cookie is set with `httpOnly: true` and `sameSite: lax`
+- [x] 10.24 Confirm `isCorrect` field is absent from `POST /api/sessions/start` response
+- [x] 10.25 Confirm all Zod schemas reject malformed payloads with a 400 response
+- [x] 10.26 Confirm JWT secret is read from environment variable, never hardcoded
 
 ---
 
