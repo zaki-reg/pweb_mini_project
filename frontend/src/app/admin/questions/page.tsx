@@ -54,8 +54,8 @@ export default function QuestionsPage() {
   const [total, setTotal] = useState(0)
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
-  const [typeFilter, setTypeFilter] = useState<string>('')
-  const [difficultyFilter, setDifficultyFilter] = useState<string>('')
+  const [typeFilter, setTypeFilter] = useState<string>('all')
+  const [difficultyFilter, setDifficultyFilter] = useState<string>('all')
   const [debouncedSearch, setDebouncedSearch] = useState('')
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [editingQuestion, setEditingQuestion] = useState<AdminQuestion | null>(null)
@@ -79,13 +79,13 @@ export default function QuestionsPage() {
       limit: '10',
     })
     if (debouncedSearch) params.append('search', debouncedSearch)
-    if (typeFilter) params.append('type', typeFilter)
-    if (difficultyFilter) params.append('difficulty', difficultyFilter)
+    if (typeFilter && typeFilter !== 'all') params.append('type', typeFilter)
+    if (difficultyFilter && difficultyFilter !== 'all') params.append('difficulty', difficultyFilter)
 
     const { data } = await api.get<QuestionsResponse>(`/api/admin/questions?${params}`)
     if (data) {
-      setQuestions(data.questions)
-      setTotal(data.total)
+      setQuestions(data.questions ?? [])
+      setTotal(data.total ?? 0)
     }
     setIsLoading(false)
   }, [page, debouncedSearch, typeFilter, difficultyFilter])
@@ -243,7 +243,7 @@ export default function QuestionsPage() {
             <SelectValue placeholder="Type" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All Types</SelectItem>
+            <SelectItem value="all">All Types</SelectItem>
             <SelectItem value="SCQ">SCQ</SelectItem>
             <SelectItem value="MCQ">MCQ</SelectItem>
           </SelectContent>
@@ -253,7 +253,7 @@ export default function QuestionsPage() {
             <SelectValue placeholder="Difficulty" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All Difficulties</SelectItem>
+            <SelectItem value="all">All Difficulties</SelectItem>
             <SelectItem value="EASY">Easy</SelectItem>
             <SelectItem value="MEDIUM">Medium</SelectItem>
             <SelectItem value="HARD">Hard</SelectItem>
@@ -263,7 +263,7 @@ export default function QuestionsPage() {
 
       {isLoading ? (
         <SkeletonTable columns={5} rows={5} />
-      ) : questions.length === 0 ? (
+      ) : (questions?.length ?? 0) === 0 ? (
         <EmptyState
           icon={HelpCircle}
           message="No questions found. Create your first question to get started."

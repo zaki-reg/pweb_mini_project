@@ -33,7 +33,7 @@ export default function AttemptsPage() {
       `/api/admin/attempts?page=${pageNum}&limit=${limit}`
     )
     if (data) {
-      setAttempts(data.attempts)
+      setAttempts(data.attempts ?? [])
       setTotal(data.total)
     }
     setIsLoading(false)
@@ -115,7 +115,7 @@ export default function AttemptsPage() {
 
       {isLoading ? (
         <SkeletonTable columns={5} rows={5} />
-      ) : attempts.length === 0 ? (
+      ) : (attempts?.length ?? 0) === 0 ? (
         <EmptyState
           icon={History}
           message="No quiz attempts yet. Share the quiz link to get started."

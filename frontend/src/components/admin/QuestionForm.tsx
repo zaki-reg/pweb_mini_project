@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Loader2, Plus, Trash2 } from 'lucide-react'
+import { Loader2, Plus, Trash2, X } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface Answer {
@@ -219,14 +219,14 @@ export function QuestionForm({ question, categories, onSuccess, onCancel }: Ques
         <div className="space-y-2">
           <Label htmlFor="category">Category</Label>
           <Select
-            value={watch('categoryId') || ''}
-            onValueChange={(v) => setValue('categoryId', v || '')}
+            value={watch('categoryId') || 'none'}
+            onValueChange={(v) => setValue('categoryId', v === 'none' ? '' : v)}
           >
             <SelectTrigger>
               <SelectValue placeholder="No category" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">No category</SelectItem>
+              <SelectItem value="none">No category</SelectItem>
               {categories.map(cat => (
                 <SelectItem key={cat.id} value={cat.id}>{cat.name}</SelectItem>
               ))}
@@ -262,53 +262,81 @@ export function QuestionForm({ question, categories, onSuccess, onCancel }: Ques
         />
       </div>
 
-      <div className="space-y-2">
-        <Label>Answers</Label>
-        {errors.answers && (
-          <p className="text-sm text-red-500">{errors.answers}</p>
-        )}
-        {errors.correct && (
-          <p className="text-sm text-red-500">{errors.correct}</p>
-        )}
-        <div className="space-y-2">
-          {answers.map((answer, index) => (
-            <div key={index} className="flex items-center gap-2">
-{questionType === 'SCQ' ? (
-                <RadioGroupItem
-                  value={String(index)}
-                  checked={scqCorrectIndex === index}
-                  id={`answer-${index}`}
-                />
-              ) : (
-                <Checkbox
-                  checked={answer.isCorrect}
-                  onCheckedChange={() => toggleCorrect(index)}
-                  id={`answer-${index}`}
-                />
-              )}
-              <Input
-                value={answer.body}
-                onChange={(e) => {
-                  const newAnswers = [...answers]
-                  newAnswers[index].body = e.target.value
-                  setAnswers(newAnswers)
-                }}
-                placeholder={`Answer ${index + 1}`}
-                className="flex-1"
-              />
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                aria-label={`Remove answer ${index + 1}`}
-                onClick={() => removeAnswer(index)}
-                disabled={answers.length <= 2}
-              >
-                <Trash2 className="h-4 w-4 text-slate-400 hover:text-red-500" />
-              </Button>
+<div className="space-y-2">
+          <Label>Answers</Label>
+          {errors.answers && (
+            <p className="text-sm text-red-500">{errors.answers}</p>
+          )}
+          {errors.correct && (
+            <p className="text-sm text-red-500">{errors.correct}</p>
+          )}
+          {questionType === 'SCQ' ? (
+            <RadioGroup
+              value={String(scqCorrectIndex)}
+              onValueChange={(val) => setScqCorrectIndex(Number(val))}
+            >
+              <div className="space-y-2">
+                {answers.map((answer, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <RadioGroupItem
+                      value={String(index)}
+                      id={`answer-${index}`}
+                    />
+                    <Input
+                      value={answer.body}
+                      onChange={(e) => {
+                        const newAnswers = [...answers]
+                        newAnswers[index].body = e.target.value
+                        setAnswers(newAnswers)
+                      }}
+                      placeholder={`Answer ${index + 1}`}
+                      id={`answer-input-${index}`}
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => removeAnswer(index)}
+                      disabled={answers.length <= 2}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </RadioGroup>
+          ) : (
+            <div className="space-y-2">
+              {answers.map((answer, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <Checkbox
+                    checked={answer.isCorrect}
+                    onCheckedChange={() => toggleCorrect(index)}
+                    id={`answer-${index}`}
+                  />
+                  <Input
+                    value={answer.body}
+                    onChange={(e) => {
+                      const newAnswers = [...answers]
+                      newAnswers[index].body = e.target.value
+                      setAnswers(newAnswers)
+                    }}
+                    placeholder={`Answer ${index + 1}`}
+                    id={`answer-input-${index}`}
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => removeAnswer(index)}
+                    disabled={answers.length <= 2}
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          )}
         <Button
           type="button"
           variant="outline"
