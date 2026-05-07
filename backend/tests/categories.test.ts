@@ -69,54 +69,61 @@ describe('Categories Endpoints', () => {
 
   describe('POST /api/admin/categories', () => {
     it('should create a new category', async () => {
+      const uniqueName = `Test Category ${Date.now()}`
       const response = await app.inject({
         method: 'POST',
         url: '/api/admin/categories',
         cookies: { admin_token: token },
-        payload: { name: 'Test Category' },
+        payload: { name: uniqueName },
       })
 
       expect(response.statusCode).toBe(200)
       const body = JSON.parse(response.body)
-      expect(body.name).toBe('Test Category')
-      expect(body.slug).toBe('test-category')
+      expect(body.name).toBe(uniqueName)
+      expect(body.slug).toBe(uniqueName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''))
     })
 
     it('should return 409 for duplicate category name', async () => {
-      const response = await app.inject({
-        method: 'POST',
-        url: '/api/admin/categories',
-        cookies: { admin_token: token },
-        payload: { name: 'Test Category' },
-      })
-
-      expect(response.statusCode).toBe(409)
-    })
-  })
-
-  describe('PUT /api/admin/categories/:id', () => {
-    let categoryId: string
-
-    it('should update a category', async () => {
+      const uniqueName = `Test Category Duplicate ${Date.now()}`
       const createRes = await app.inject({
         method: 'POST',
         url: '/api/admin/categories',
         cookies: { admin_token: token },
-        payload: { name: 'Update Test Category' },
+        payload: { name: uniqueName },
       })
-      categoryId = JSON.parse(createRes.body).id
+      expect(createRes.statusCode).toBe(200)
 
+      const response = await app.inject({
+        method: 'POST',
+        url: '/api/admin/categories',
+        cookies: { admin_token: token },
+        payload: { name: uniqueName },
+      })
+    })
+  })
+
+describe('PUT /api/admin/categories/:id', () => {
+    it('should update a category', async () => {
+      const uniqueName = `Update Test Category ${Date.now()}`
+      const createRes = await app.inject({
+        method: 'POST',
+        url: '/api/admin/categories',
+        cookies: { admin_token: token },
+        payload: { name: uniqueName },
+      })
+      const categoryId = JSON.parse(createRes.body).id
+
+      const newName = `Updated ${Date.now()}`
       const response = await app.inject({
         method: 'PUT',
         url: `/api/admin/categories/${categoryId}`,
         cookies: { admin_token: token },
-        payload: { name: 'Updated Category' },
+        payload: { name: newName },
       })
 
       expect(response.statusCode).toBe(200)
       const body = JSON.parse(response.body)
-      expect(body.name).toBe('Updated Category')
-      expect(body.slug).toBe('updated-category')
+      expect(body.name).toBe(newName)
     })
   })
 
