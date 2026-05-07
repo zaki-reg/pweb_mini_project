@@ -151,32 +151,32 @@ function ResultsContent() {
     )
   }
 
-  const circumference = 2 * Math.PI * 45
+  const circumference = 2 * Math.PI * 40
   const strokeDashoffset = circumference - (animatedScore / 100) * circumference
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] py-12 px-4">
       <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-white mb-8">Quiz Complete!</h1>
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">Quiz Complete!</h1>
 
           <div className="relative inline-block">
-            <svg className="w-48 h-48 transform -rotate-90">
+            <svg className="w-32 h-32 sm:w-40 sm:w-48 sm:h-48 transform -rotate-90">
               <circle
-                cx="96"
-                cy="96"
-                r="45"
+                cx="64"
+                cy="64"
+                r="40"
                 stroke="currentColor"
-                strokeWidth="8"
+                strokeWidth="6"
                 fill="transparent"
                 className="text-slate-800"
               />
               <circle
-                cx="96"
-                cy="96"
-                r="45"
+                cx="64"
+                cy="64"
+                r="40"
                 stroke="url(#gradient)"
-                strokeWidth="8"
+                strokeWidth="6"
                 fill="transparent"
                 strokeLinecap="round"
                 strokeDasharray={circumference}
@@ -191,7 +191,7 @@ function ResultsContent() {
               </defs>
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-5xl font-bold text-white">{animatedScore}%</span>
+              <span className="text-4xl sm:text-5xl font-bold text-white">{animatedScore}%</span>
             </div>
           </div>
 

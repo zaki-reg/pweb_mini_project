@@ -63,7 +63,7 @@ export default function Home() {
               />
             </svg>
           </div>
-          <h1 className="text-5xl font-bold text-white tracking-tight mb-3">
+          <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-3">
             Quiz<span className="text-amber-500">Master</span>
           </h1>
           <p className="text-slate-400 text-lg font-light">

@@ -290,12 +290,12 @@
 - [x] 10.10 Handle already-submitted session on `/quiz`: redirect to `/results` or homepage
 
 ### Responsive Design
-- [ ] 10.11 Test homepage at 375px, 768px, 1280px — no overflow or broken layout
-- [ ] 10.12 Test quiz interface at 375px — answer options stack cleanly, navigation buttons are full-width
-- [ ] 10.13 Test results page at 375px — score ring and accordion are readable
-- [ ] 10.14 Test admin dashboard at 375px — stat cards stack vertically, sidebar collapses
-- [ ] 10.15 Test question form at 375px — dynamic answer list is usable on mobile
-- [ ] 10.16 Ensure all touch targets are at least 44×44px
+- [x] 10.11 Test homepage at 375px, 768px, 1280px — no overflow or broken layout
+- [x] 10.12 Test quiz interface at 375px — answer options stack cleanly, navigation buttons are full-width
+- [x] 10.13 Test results page at 375px — score ring and accordion are readable
+- [x] 10.14 Test admin dashboard at 375px — stat cards stack vertically, sidebar collapses
+- [x] 10.15 Test question form at 375px — dynamic answer list is usable on mobile
+- [x] 10.16 Ensure all touch targets are at least 44×44px
 
 ### Accessibility
 - [ ] 10.17 Ensure every `<input>` has an associated `<label>`

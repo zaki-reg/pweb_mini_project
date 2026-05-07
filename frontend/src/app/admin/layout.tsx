@@ -37,9 +37,11 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-slate-50">
       <AdminSidebar />
-      <main className="lg:pl-64">
-        <div className="p-6 lg:p-8">{children}</div>
-      </main>
+      <div className="ml-0 lg:pl-64">
+        <main className="p-4 sm:p-6 lg:p-8">
+          {children}
+        </main>
+      </div>
     </div>
   )
 }

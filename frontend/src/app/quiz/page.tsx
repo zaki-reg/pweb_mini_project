@@ -175,10 +175,10 @@ function QuizContent() {
     <main className="min-h-screen bg-[#0a0a0a] py-8 px-4">
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <span className="text-slate-400 text-sm">
-                Question {currentIndex + 1} of {session.questions.length}
+                Q{currentIndex + 1}/{session.questions.length}
               </span>
               <Badge
                 variant={currentQuestion.type === 'SCQ' ? 'default' : 'secondary'}
@@ -186,13 +186,13 @@ function QuizContent() {
                   ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' 
                   : 'bg-purple-500/20 text-purple-400 border-purple-500/30'}
               >
-                {currentQuestion.type === 'SCQ' ? 'Single Choice' : 'Multiple Choice'}
+                {currentQuestion.type === 'SCQ' ? 'SCQ' : 'MCQ'}
               </Badge>
             </div>
             <div className="flex items-center gap-2 text-sm text-slate-400">
-              <span className="text-emerald-400">{answeredCount} answered</span>
+              <span className="text-emerald-400">{answeredCount} done</span>
               {unansweredCount > 0 && (
-                <span className="text-rose-400">• {unansweredCount} left</span>
+                <span className="text-rose-400">{unansweredCount} left</span>
               )}
             </div>
           </div>
@@ -234,7 +234,7 @@ function QuizContent() {
                 {currentQuestion.answers.map((answer) => (
                   <div
                     key={answer.id}
-                    className={`flex items-center space-x-3 p-4 rounded-lg border transition-all cursor-pointer ${
+                    className={`flex items-start sm:items-center space-x-3 p-3 sm:p-4 rounded-lg border transition-all cursor-pointer ${
                       answers[currentQuestion.id]?.[0] === answer.id
                         ? 'bg-amber-500/10 border-amber-500/50'
                         : 'bg-slate-800/50 border-slate-700 hover:border-slate-600'
@@ -244,11 +244,11 @@ function QuizContent() {
                     <RadioGroupItem
                       value={answer.id}
                       id={answer.id}
-                      className="border-slate-500 text-amber-500"
+                      className="border-slate-500 text-amber-500 mt-1 sm:mt-0"
                     />
                     <Label
                       htmlFor={answer.id}
-                      className="text-slate-200 cursor-pointer flex-1"
+                      className="text-slate-200 cursor-pointer flex-1 text-sm sm:text-base"
                     >
                       {answer.body}
                     </Label>
@@ -262,7 +262,7 @@ function QuizContent() {
                   return (
                     <div
                       key={answer.id}
-                      className={`flex items-center space-x-3 p-4 rounded-lg border transition-all cursor-pointer ${
+                      className={`flex items-start sm:items-center space-x-3 p-3 sm:p-4 rounded-lg border transition-all cursor-pointer ${
                         isSelected
                           ? 'bg-purple-500/10 border-purple-500/50'
                           : 'bg-slate-800/50 border-slate-700 hover:border-slate-600'
@@ -272,14 +272,14 @@ function QuizContent() {
                       <Checkbox
                         id={answer.id}
                         checked={isSelected}
-                        className="border-slate-500 text-purple-500"
+                        className="border-slate-500 text-purple-500 mt-1 sm:mt-0"
                         onCheckedChange={() =>
                           handleAnswerSelect(currentQuestion.id, answer.id, true)
                         }
                       />
                       <Label
                         htmlFor={answer.id}
-                        className="text-slate-200 cursor-pointer flex-1"
+                        className="text-slate-200 cursor-pointer flex-1 text-sm sm:text-base"
                       >
                         {answer.body}
                       </Label>
@@ -291,12 +291,12 @@ function QuizContent() {
           </CardContent>
         </Card>
 
-        <div className="flex justify-between items-center mt-8">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8">
           <Button
             variant="outline"
             onClick={handlePrevious}
             disabled={currentIndex === 0}
-            className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white"
+            className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white w-full sm:w-auto min-h-[44px]"
           >
             Previous
           </Button>
@@ -304,14 +304,14 @@ function QuizContent() {
           {currentIndex === session.questions.length - 1 ? (
             <Button
               onClick={() => setShowSubmitDialog(true)}
-              className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white"
+              className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white w-full sm:w-auto min-h-[44px]"
             >
               Submit Quiz
             </Button>
           ) : (
             <Button
               onClick={handleNext}
-              className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white"
+              className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white w-full sm:w-auto min-h-[44px]"
             >
               Next
             </Button>
