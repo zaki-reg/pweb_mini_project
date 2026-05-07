@@ -20,6 +20,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { toast } from 'sonner'
+import { EmptyState } from '@/components/ui/empty-state'
 
 interface CategoryWithCount {
   id: string
@@ -111,6 +112,7 @@ export default function CategoriesPage() {
       <div className="mb-6">
         <form onSubmit={handleCreate} className="flex gap-2">
           <Input
+            id="category-input"
             placeholder="New category name..."
             value={newCategoryName}
             onChange={(e) => setNewCategoryName(e.target.value)}
@@ -135,10 +137,14 @@ export default function CategoriesPage() {
       {isLoading ? (
         <SkeletonTable columns={4} rows={5} />
       ) : categories.length === 0 ? (
-        <div className="text-center py-12">
-          <FolderOpen className="mx-auto h-12 w-12 text-slate-300" />
-          <p className="mt-4 text-slate-500">No categories yet</p>
-        </div>
+        <EmptyState
+          icon={FolderOpen}
+          message="No categories yet. Create your first category to organize questions."
+          actionLabel="Create Category"
+          onAction={() => {
+            document.getElementById('category-input')?.focus()
+          }}
+        />
       ) : (
         <div className="rounded-md border">
           <table className="w-full">

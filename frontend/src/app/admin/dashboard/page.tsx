@@ -9,6 +9,8 @@ import { DataTable } from '@/components/ui/data-table'
 import { SkeletonTable } from '@/components/ui/skeleton-table'
 import { HelpCircle, Users, TrendingUp, Clock } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { EmptyState } from '@/components/ui/empty-state'
+import { History } from 'lucide-react'
 
 export default function DashboardPage() {
   const [stats, setStats] = useState<Stats | null>(null)
@@ -91,9 +93,10 @@ export default function DashboardPage() {
             pageSize={5}
           />
         ) : (
-          <div className="text-center py-8 text-slate-500">
-            No attempts yet
-          </div>
+          <EmptyState
+            icon={History}
+            message="No quiz attempts yet. Share the quiz link to get started."
+          />
         )}
       </div>
     </div>

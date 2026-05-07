@@ -276,10 +276,10 @@
 ## Phase 10 — Polish & Quality Pass
 
 ### Loading States
-- [ ] 10.1 Add shimmer skeleton to every admin table that loads async data
-- [ ] 10.2 Add loading spinner to all submit/save buttons while request is in flight
-- [ ] 10.3 Add `EmptyState` component to: question list, category list, attempts list (when no data exists)
-- [ ] 10.4 Add empty state to quiz results review if no review data is available
+- [x] 10.1 Add shimmer skeleton to every admin table that loads async data
+- [x] 10.2 Add loading spinner to all submit/save buttons while request is in flight
+- [x] 10.3 Add `EmptyState` component to: question list, category list, attempts list (when no data exists)
+- [x] 10.4 Add empty state to quiz results review if no review data is available
 
 ### Error Handling
 - [ ] 10.5 Wrap every API call in a try/catch

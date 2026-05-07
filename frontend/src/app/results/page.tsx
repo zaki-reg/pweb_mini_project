@@ -14,6 +14,8 @@ import {
 } from '@/components/ui/accordion'
 import { Badge } from '@/components/ui/badge'
 import { Toaster, toast } from 'sonner'
+import { EmptyState } from '@/components/ui/empty-state'
+import { EyeOff } from 'lucide-react'
 
 interface QuizSessionData {
   sessionToken: string
@@ -204,7 +206,7 @@ function ResultsContent() {
           </div>
         </div>
 
-        {result.questions && session && (
+        {result.questions && result.questions.length > 0 && session ? (
           <div className="mt-12">
             <h2 className="text-xl font-semibold text-white mb-6">Review Your Answers</h2>
             <Accordion type="single" collapsible className="space-y-3">
@@ -346,6 +348,13 @@ function ResultsContent() {
                 )
               })}
             </Accordion>
+          </div>
+        ) : (
+          <div className="mt-12">
+            <EmptyState
+              icon={EyeOff}
+              message="Review is not available for this quiz. Your score has been recorded."
+            />
           </div>
         )}
 

@@ -37,6 +37,8 @@ import {
 import { QuestionForm } from '@/components/admin/QuestionForm'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { toast } from 'sonner'
+import { EmptyState } from '@/components/ui/empty-state'
+import { HelpCircle } from 'lucide-react'
 
 interface QuestionsResponse {
   questions: AdminQuestion[]
@@ -260,9 +262,15 @@ export default function QuestionsPage() {
       {isLoading ? (
         <SkeletonTable columns={5} rows={5} />
       ) : questions.length === 0 ? (
-        <div className="text-center py-12 text-slate-500">
-          No questions found
-        </div>
+        <EmptyState
+          icon={HelpCircle}
+          message="No questions found. Create your first question to get started."
+          actionLabel="Create Question"
+          onAction={() => {
+            setEditingQuestion(null)
+            setIsFormOpen(true)
+          }}
+        />
       ) : (
         <>
           <DataTable

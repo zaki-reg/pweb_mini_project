@@ -331,8 +331,10 @@ export function QuestionForm({ question, categories, onSuccess, onCancel }: Ques
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Saving...
             </>
+          ) : question ? (
+            'Update Question'
           ) : (
-            question ? 'Update Question' : 'Create Question'
+            'Create Question'
           )}
         </Button>
       </div>

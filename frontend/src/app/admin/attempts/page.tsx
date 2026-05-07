@@ -9,6 +9,7 @@ import { PageHeader } from '@/components/ui/page-header'
 import { SkeletonTable } from '@/components/ui/skeleton-table'
 import { Badge } from '@/components/ui/badge'
 import { ChevronLeft, ChevronRight, History } from 'lucide-react'
+import { EmptyState } from '@/components/ui/empty-state'
 
 interface AttemptsResponse {
   attempts: Attempt[]
@@ -115,10 +116,10 @@ export default function AttemptsPage() {
       {isLoading ? (
         <SkeletonTable columns={5} rows={5} />
       ) : attempts.length === 0 ? (
-        <div className="text-center py-12">
-          <History className="mx-auto h-12 w-12 text-slate-300" />
-          <p className="mt-4 text-slate-500">No attempts yet</p>
-        </div>
+        <EmptyState
+          icon={History}
+          message="No quiz attempts yet. Share the quiz link to get started."
+        />
       ) : (
         <>
           <div className="rounded-md border overflow-hidden">
