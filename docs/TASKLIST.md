@@ -203,11 +203,11 @@
 - [x] 8.29 Wire form submit to `PUT /api/admin/questions/:id` for edit (pre-fill all fields)
 
 ### Categories
-- [ ] 8.30 Create `/admin/categories/page.tsx`
-- [ ] 8.31 List all categories with name, slug, and question count
-- [ ] 8.32 Add inline rename form per category row
-- [ ] 8.33 Add Delete button with `AlertDialog` (disabled if category has questions, show tooltip explaining why)
-- [ ] 8.34 Add "New Category" form at the top of the page
+- [x] 8.30 Create `/admin/categories/page.tsx`
+- [x] 8.31 List all categories with name, slug, and question count
+- [x] 8.32 Add inline rename form per category row
+- [x] 8.33 Add Delete button with `AlertDialog` (disabled if category has questions, show tooltip explaining why)
+- [x] 8.34 Add "New Category" form at the top of the page
 
 ### Attempts
 - [ ] 8.35 Create `/admin/attempts/page.tsx` with paginated table of all submitted sessions
