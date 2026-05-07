@@ -92,11 +92,10 @@ export async function attemptsRoutes(fastify: FastifyInstance) {
       ]);
 
       return {
-        data: attempts,
+        attempts,
         total,
         page,
         limit,
-        totalPages: Math.ceil(total / limit),
       };
     },
   );
